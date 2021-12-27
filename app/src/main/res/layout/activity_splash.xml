@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/Floral_White"
     android:backgroundTint="@color/Floral_White"
-    tools:context=".splashActivity">
+    tools:context=".view.Activity.splashActivity">
 
     <ImageView
         android:id="@+id/imageView2"

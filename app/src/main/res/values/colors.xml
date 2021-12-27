@@ -8,6 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="Antique_White">#FBEBD8</color>
-    <color name="Floral_White">#FFFAEF</color>
-    <color name="bar">#84c6bc</color>
+    <color name="Floral_White">#FEFAF2</color>
+
+    <color name="bar">#E1EDCF</color>
+    <color name="WhiteSmoke">#F5F5F5</color>
+
+    <color name="olive">#797D32</color>
+    <color name="red">#FF0000 </color>
 </resources>

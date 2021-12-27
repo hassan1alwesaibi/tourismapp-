@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/Floral_White"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".view.Activity.LoginActivity">
 
     <TextView
         android:id="@+id/textView1"
@@ -16,9 +16,9 @@
         android:layout_marginBottom="50dp"
         android:fontFamily="@font/arizonia"
         android:gravity="center"
-        android:text="Welcome"
+        android:text="@string/welcome"
         android:textColor="@color/black"
-        android:textSize="48sp" />
+        android:textSize="50sp" />
 
     <EditText
         android:id="@+id/Emaillogin_EditText"
@@ -30,7 +30,7 @@
         android:background="@color/white"
         android:backgroundTint="@color/white"
         android:ems="10"
-        android:hint="E-mail"
+        android:hint="@string/e_mail"
         android:inputType="textEmailAddress"
         android:minHeight="45dip"
         android:padding="5dp" />
@@ -56,8 +56,10 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
         android:gravity="right"
-        android:text="Forget Password ?"
-        android:textColor="@color/bar" />
+        android:text="@string/forget_password"
+        android:textColor="@color/olive"
+        android:textSize="16sp"
+        tools:ignore="RtlHardcoded" />
 
     <Button
         android:id="@+id/LogIn_Button"
@@ -66,16 +68,18 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="45dp"
         android:layout_marginRight="15dp"
-        android:backgroundTint="@color/bar"
-        android:text="Log In"
-        android:textColor="@color/white" />
+        android:backgroundTint="@color/olive"
+        android:text="@string/log_in"
+        android:fontFamily="@font/oregano"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="10dp"
         android:background="?android:attr/listDivider" />
 
@@ -89,16 +93,18 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Don't have an account?" />
+            android:layout_marginStart="10dp"
+            android:text="@string/don_t_have_an_account"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/SingUp_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
-            android:text="Sing Up."
-            android:textColor="@color/bar"
+            android:text="@string/sing_up"
+            android:textColor="@color/olive"
+            android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
 
