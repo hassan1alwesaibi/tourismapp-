@@ -14,6 +14,7 @@ import com.example.tourism.Repostries.UsersRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,6 +29,8 @@ class UsersViewModel : ViewModel() {
     val getUserLiveDate = MutableLiveData<Users>()
     val deleUserLiveDate = MutableLiveData<String>()
     val usersErrorLiveData = MutableLiveData<String>()
+    val getlistUserLiveData = MutableLiveData<List<Users>>()
+
     private val apiRepo = UsersRepository.get()
     private var firestore: FirebaseFirestore
 
@@ -113,7 +116,37 @@ class UsersViewModel : ViewModel() {
             }
         }
     }
-}
+    //-------------------------------------------------------------------
+
+    fun getlistUsers(){
+        var listuser = mutableListOf<Users>()
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+            apiRepo.getlistUsers()
+                .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val user = document.toObject<Users>()
+                    user.UserId = document.id
+                    listuser.add(user)
+
+                }
+                    getlistUserLiveData.postValue(listuser)
+            }.addOnFailureListener {
+                usersErrorLiveData.postValue(it.message.toString())
+                Log.d("Firebase", it.message.toString())
+              }
+
+            } catch (e: Exception) {
+                Log.d(ContentValues.TAG, e.message.toString())
+                usersErrorLiveData.postValue(e.message.toString())
+            }
+
+
+        }
+        }
+
+    }
+
 
 
 

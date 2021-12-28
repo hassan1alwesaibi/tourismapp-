@@ -9,7 +9,7 @@ data class Photo(
     @SerializedName("html_attributions")
     val htmlAttributions: List<String>,
     @SerializedName("photo_reference")
-    val photoReference: String,
+    val photoReference: String?,
     @SerializedName("width")
     val width: Int
 )

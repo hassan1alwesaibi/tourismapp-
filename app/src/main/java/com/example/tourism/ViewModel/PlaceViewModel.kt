@@ -37,6 +37,5 @@ class PlaceViewModel:ViewModel() {
                 placesErrorLiveData.postValue(e.message.toString())
             }
         }
-
     }
 }

@@ -21,6 +21,7 @@ import com.example.tourism.R
 import com.example.tourism.ViewModel.PlaceViewModel
 
 import android.os.Bundle
+import com.example.tourism.Model.Dto.CollectionModel
 
 class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
                             val fileContext: Context,val fragmentManager:FragmentManager) :
@@ -58,13 +59,16 @@ class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
 
     override fun onBindViewHolder(holder: PlacesViewHolder, position: Int) {
         val item = differ.currentList[position]
+        var imgLink = ""
+        if (item.photos != null) {
+            imgLink = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photo_reference=${item.photos[0].photoReference}&key=AIzaSyAswnygZzJMdw9uEJ21KM5ZTLiAFj7Fogc"}
+       val co = CollectionModel(imgLink,item.name,"",item.geometry.location)
 
-
-        item?.let {
-            item.photos?.let {
-                if (item.photos[0] != null) {
+//        item?.let {
+   //         item.photos?.let {
+                if (item.photos != null) {
                     Glide.with(fileContext)
-                        .load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photo_reference=${item.photos[0].photoReference}&key=AIzaSyAswnygZzJMdw9uEJ21KM5ZTLiAFj7Fogc")
+                        .load(imgLink)
                         .centerCrop()
                         .into(holder.pictureOfPlace)
 
@@ -72,14 +76,15 @@ class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
                 }
                 holder.nameOfPlace.text = item.name
 
-            }
+          //  }
 
 
-        }
+      //  }
         holder.Dots_Button.setOnClickListener {
 
             val bundle = Bundle()
             bundle.putParcelable("bitmap", getBitmapFromView(holder.pictureOfPlace))
+            bundle.putParcelable("Location",co)
             sheetDialog.arguments = bundle
             sheetDialog.show(fragmentManager,"")
 

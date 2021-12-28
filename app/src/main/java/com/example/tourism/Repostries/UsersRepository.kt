@@ -17,10 +17,11 @@ class UsersRepository(val context: Context) {
 //    private val ref = storageReference.child(FirebaseAuth.getInstance().uid.toString())
 
 
-    suspend fun save(users: Users) = Reference.document(FirebaseAuth.getInstance().uid.toString()).set(users)
-    suspend fun UploadPhoto(imge: Uri) = storageReference.child(FirebaseAuth.getInstance().uid.toString()).putFile(imge)
-    suspend fun delete()  = Reference.document(FirebaseAuth.getInstance().uid.toString()).delete()
-    suspend fun getUser()  = Reference.document(FirebaseAuth.getInstance().uid.toString()).get()
+            fun save(users: Users) = Reference.document(FirebaseAuth.getInstance().uid.toString()).set(users)
+            fun UploadPhoto(imge: Uri) = storageReference.child(FirebaseAuth.getInstance().uid.toString()).putFile(imge)
+            fun delete()  = Reference.document(FirebaseAuth.getInstance().uid.toString()).delete()
+            fun getUser()  = Reference.document(FirebaseAuth.getInstance().uid.toString()).get()
+            fun getlistUsers() = Reference.get()
         companion object {
         private var instance: UsersRepository? = null
 

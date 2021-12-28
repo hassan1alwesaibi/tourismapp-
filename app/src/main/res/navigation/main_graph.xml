@@ -13,6 +13,9 @@
             android:id="@+id/action_mainFragment_to_profileFragment"
             app:destination="@id/profileFragment"
             app:enterAnim="@anim/slide_up" />
+        <action
+            android:id="@+id/action_mainFragment_to_userlistFragment"
+            app:destination="@id/userlistFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -24,4 +27,8 @@
             app:destination="@id/mainFragment"
             app:enterAnim="@anim/slide_down" />
     </fragment>
+    <fragment
+        android:id="@+id/userlistFragment"
+        android:name="com.example.tourism.view.userlistFragment"
+        android:label="userlistFragment" />
 </navigation>

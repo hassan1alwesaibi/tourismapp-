@@ -19,7 +19,7 @@ data class Result(
     @SerializedName("opening_hours")
     val openingHours: OpeningHours,
     @SerializedName("photos")
-    val photos: List<Photo>,
+    val photos: List<Photo>?,
     @SerializedName("place_id")
     val placeId: String,
     @SerializedName("plus_code")

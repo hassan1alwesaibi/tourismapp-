@@ -1,6 +1,6 @@
 package com.example.tourism.Model.Dto
 
-data class Users(var ProfileImage:String ="" ,
+data class Users(var UserId:String ="" ,
                  var FirstName:String = "",
                  var LastName:String = "",
                  var Gender:String="",

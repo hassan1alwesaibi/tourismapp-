@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
         val login_button: Button = findViewById(R.id.LogIn_Button)
         val register_TextView: TextView = findViewById(R.id.SingUp_TextView)
         val ForgetPassword: TextView = findViewById(R.id.ForgetPassword)
-//---------------------------------------------------------------------
+//---------------------------------------------------------------------call forgetPassword dialog
         ForgetPassword.setOnClickListener() {
             val builder: AlertDialog.Builder = AlertDialog.Builder(this)
             builder.setTitle("Forget Password")
