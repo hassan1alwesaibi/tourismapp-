@@ -1,11 +1,14 @@
 package com.example.tourism.Model.PlaceModel
 
 
+
 import com.google.gson.annotations.SerializedName
+
+
 
 data class Result(
     @SerializedName("business_status")
-    val businessStatus: String,
+    val businessStatus: String?,
     @SerializedName("geometry")
     val geometry: Geometry,
     @SerializedName("icon")
@@ -15,19 +18,19 @@ data class Result(
     @SerializedName("icon_mask_base_uri")
     val iconMaskBaseUri: String,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("opening_hours")
-    val openingHours: OpeningHours,
+    val openingHours: OpeningHours?,
     @SerializedName("photos")
     val photos: List<Photo>?,
     @SerializedName("place_id")
-    val placeId: String,
+    val placeId: String?,
     @SerializedName("plus_code")
     val plusCode: PlusCode,
     @SerializedName("price_level")
     val priceLevel: Int,
     @SerializedName("rating")
-    val rating: Double,
+    val rating: Double?,
     @SerializedName("reference")
     val reference: String,
     @SerializedName("scope")
@@ -37,5 +40,5 @@ data class Result(
     @SerializedName("user_ratings_total")
     val userRatingsTotal: Int,
     @SerializedName("vicinity")
-    val vicinity: String
+    val vicinity: String?
 )

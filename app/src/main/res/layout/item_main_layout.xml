@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
-                app:srcCompat="@drawable/ic__dots" />
+                app:srcCompat="@drawable/ic_dots" />
         </LinearLayout>
 
     </LinearLayout>

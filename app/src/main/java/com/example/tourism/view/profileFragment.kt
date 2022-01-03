@@ -95,7 +95,7 @@ class profileFragment : Fragment() {
                 saveaddite()
             }
         }
-
+//-----------------------------------------------------
         delete.setOnClickListener {
             val alertDialog = android.app.AlertDialog.Builder(context).setTitle("Delete account")
                 .setMessage(
@@ -161,7 +161,7 @@ class profileFragment : Fragment() {
         }
     }
 
-    //-------------------------------------------------------------------
+    //-------------------------------------------------------------------for imge picker and show
     fun ImagePicker() {
         Matisse.from(this)
             .choose(MimeType.ofImage(), false)
@@ -180,7 +180,7 @@ class profileFragment : Fragment() {
             .into(imge)
     }
 
-    //----------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------update data
     fun saveaddite() {
         users.apply {
             FirstName = firstName.text.toString()

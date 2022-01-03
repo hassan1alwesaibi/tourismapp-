@@ -21,10 +21,18 @@ import com.example.tourism.R
 import com.example.tourism.ViewModel.PlaceViewModel
 
 import android.os.Bundle
+import androidx.navigation.Navigation.findNavController
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+
+
 import com.example.tourism.Model.Dto.CollectionModel
+import com.example.tourism.Model.Dto.DetailsModel
+
+
+lateinit var details:DetailsModel  // ask
 
 class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
-                            val fileContext: Context,val fragmentManager:FragmentManager) :
+                            val fileContext: Context,val fragmentManager:FragmentManager, val view:View) :
     RecyclerView.Adapter<PlacesRecyclerAdapter.PlacesViewHolder>() {
 
     var sheetDialog = BottomSheetFragment()
@@ -50,7 +58,7 @@ class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
 
         return PlacesViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.item_layout,
+                R.layout.item_main_layout,
                 parent,
                 false
             )
@@ -60,38 +68,51 @@ class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
     override fun onBindViewHolder(holder: PlacesViewHolder, position: Int) {
         val item = differ.currentList[position]
         var imgLink = ""
-        if (item.photos != null) {
-            imgLink = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photo_reference=${item.photos[0].photoReference}&key=AIzaSyAswnygZzJMdw9uEJ21KM5ZTLiAFj7Fogc"}
-       val co = CollectionModel(imgLink,item.name,"",item.geometry.location)
 
-//        item?.let {
-   //         item.photos?.let {
+        if (item.photos != null) {
+            imgLink = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photo_reference=${item.photos[0].photoReference}&key=AIzaSyAswnygZzJMdw9uEJ21KM5ZTLiAFj7Fogc"
+        }
+        val collection =
+            CollectionModel(imgLink, item.name!!, "", item.geometry.location)
+
                 if (item.photos != null) {
                     Glide.with(fileContext)
                         .load(imgLink)
                         .centerCrop()
                         .into(holder.pictureOfPlace)
-
-
                 }
-                holder.nameOfPlace.text = item.name
+            holder.nameOfPlace.text = item.name
+//-------------------------------------------------------------when press in pic show details and comment
+            holder.pictureOfPlace.setOnClickListener {
+                details = DetailsModel(
+                    imgLink,
+                    item.name,
+                    item.businessStatus.toString(),
+                    item.vicinity.toString(),
+                    item.rating ?: 0.0,
+                    item.placeId!!
+                )
+                val bundle = Bundle()
+                bundle.putParcelable("details",details)//ask
+                findNavController(view).navigate(R.id.action_mainFragment_to_detailsFragment,bundle)
+            }
+  //--------------------------------------------------------------- when press in 3dots open bottom sheet
 
-          //  }
-
-
-      //  }
         holder.Dots_Button.setOnClickListener {
-
             val bundle = Bundle()
+            //pass information to another fragment
             bundle.putParcelable("bitmap", getBitmapFromView(holder.pictureOfPlace))
-            bundle.putParcelable("Location",co)
+            bundle.putParcelable("Location",collection)
+            bundle.putParcelable("details",details)
+
+
             sheetDialog.arguments = bundle
             sheetDialog.show(fragmentManager,"")
 
    }
 
     }
-
+//---------------------------------------------------------------------
     fun getBitmapFromView(view: ImageView): Bitmap? { //View //1
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
@@ -99,17 +120,18 @@ class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
         return bitmap
     }
 
-
+//--------------------------------------------------------------------------
     override fun getItemCount(): Int {
         return differ.currentList.size - 1
     }
-
+//----------------------------------------------------------------------------
     class PlacesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var pictureOfPlace: ImageView = itemView.findViewById(R.id.PictureOfPlace)
         val nameOfPlace: TextView = itemView.findViewById(R.id.NameOfPlace)
         val Dots_Button:ImageButton = itemView.findViewById(R.id.Dots_Button)
 
     }
+
 }
 
 

@@ -14,7 +14,7 @@
         app:cardCornerRadius="10dp">
 
         <ImageView
-            android:id="@+id/userpicture_ImgeView"
+            android:id="@+id/pic_ImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/userprofile" />

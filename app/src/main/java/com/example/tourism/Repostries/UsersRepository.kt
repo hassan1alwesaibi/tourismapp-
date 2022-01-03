@@ -2,6 +2,7 @@ package com.example.tourism.Repostries
 
 import android.content.Context
 import android.net.Uri
+import com.example.tourism.Model.Dto.CommentsModel
 import com.example.tourism.Model.Dto.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -14,6 +15,7 @@ class UsersRepository(val context: Context) {
 
     private var storageReference = FirebaseStorage.getInstance().getReference()
     private var Reference =  Firebase.firestore.collection("users")
+    private var Places = Firebase.firestore.collection("places")
 //    private val ref = storageReference.child(FirebaseAuth.getInstance().uid.toString())
 
 
@@ -22,7 +24,14 @@ class UsersRepository(val context: Context) {
             fun delete()  = Reference.document(FirebaseAuth.getInstance().uid.toString()).delete()
             fun getUser()  = Reference.document(FirebaseAuth.getInstance().uid.toString()).get()
             fun getlistUsers() = Reference.get()
-        companion object {
+
+            fun getUserDatabyId(userId: String) = Reference.document(userId).get()
+
+            fun savecomments(placeId:String, comment:CommentsModel ) = Places.document(placeId).collection("comeents").add(comment)
+            fun getcomments(placeId:String) = Places.document(placeId).collection("comeents").get()
+
+
+    companion object {
         private var instance: UsersRepository? = null
 
         fun init(context: Context) {

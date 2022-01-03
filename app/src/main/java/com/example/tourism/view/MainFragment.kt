@@ -8,7 +8,10 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.EditText
+import android.widget.SeekBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +24,7 @@ import com.example.tourism.view.Activity.sharedPreferences
 import com.example.tourism.view.Activity.sharedPreferencesEditor
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.tourism.Model.Dto.DetailsModel
 import com.example.tourism.R
 import com.example.tourism.ViewModel.PlaceViewModel
 import com.example.tourism.adapters.PlacesRecyclerAdapter
@@ -33,11 +37,14 @@ const val TAG = "MainFragment"
 private var latitude: Double = 0.0
 private var longitude: Double = 0.0
 
+
+
 class MainFragment : Fragment() {
     private val placeViewModel: PlaceViewModel by activityViewModels()
     private lateinit var PlaceAdapter: PlacesRecyclerAdapter
     private lateinit var binding: MainFragmentBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val detailsModel = DetailsModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,13 +65,14 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        PlaceAdapter = PlacesRecyclerAdapter(placeViewModel,requireContext(),requireFragmentManager())
+        PlaceAdapter = PlacesRecyclerAdapter(placeViewModel,requireContext(),requireFragmentManager(),requireView()
+        )
         binding.MainViewRecyclerView.adapter = PlaceAdapter
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         getCurrentLocation() // call
         observers() // cll
-        //--------------------------------------------------------------- for toolbar
+        //--------------------------------------------------------------- set up toolbar like actionbar
         val toolbar: Toolbar = view.findViewById(R.id.toolbar)
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
         (activity as AppCompatActivity?)!!.supportActionBar!!.title = ""
@@ -78,7 +86,7 @@ class MainFragment : Fragment() {
     }
     //------------------------------------------------------------------------
 override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    if (item.itemId == R.id.logout) {
+    if (item.itemId == R.id.logout) { // for select logout will show you dialog
         val alertDialog = android.app.AlertDialog.Builder(context).setTitle("Logout")
             .setMessage("Are you sure you want to logout ?")
         alertDialog.setPositiveButton("Logout") { _, _ ->
@@ -101,10 +109,43 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
         alertDialog.show()
 
     }
-        if(item.itemId == R.id.profile){
+        if(item.itemId == R.id.profile){ // when select profile open profileFragment
             findNavController().navigate(R.id.action_mainFragment_to_profileFragment)
 
         }
+        if(item.itemId == R.id.filter){
+            val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("")
+            val view: View = layoutInflater.inflate(R.layout.dialog_seekbar_layout, null)
+//            val valueradius : SeekBar = view.findViewById(R.id.valueSeekBar)
+//            valueradius.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+//                override fun onProgressChanged(
+//                    seekBar: SeekBar?,
+//                    progress: Int,
+//                    fromUser: Boolean
+//                ) {
+//
+//                }
+//
+//                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+//
+//                }
+//
+//                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+//
+//                }
+//            })
+
+            builder.setView(view)
+            builder.setPositiveButton("Submit", { _, _ ->
+
+            })
+            builder.setNegativeButton("Close", { _, _ -> })
+            builder.show()
+
+
+        }
+
 
     return super.onOptionsItemSelected(item)
 
@@ -135,7 +176,7 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
                 latitude = location.latitude
                 longitude = location.longitude
 
-                placeViewModel.callPlace(latitude, longitude)
+                placeViewModel.callPlace(latitude, longitude,1000000)
 
                 Log.d("return for location lan", "${location.latitude}")
                 Log.d("result for location lon", "${location.longitude}")

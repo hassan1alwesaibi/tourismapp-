@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.tourism.Repostries.PlaceRepository
 import com.example.tourism.R
+
 import com.example.tourism.Repostries.UsersRepository
 import com.example.tourism.databinding.ActivitySplashBinding
 
@@ -39,6 +40,7 @@ class splashActivity : AppCompatActivity() {
 
         PlaceRepository.init(this)
         UsersRepository.init(this)
+//        RoomServiceRepository.init(this)
         setContentView(R.layout.activity_splash)
         mDelayHandler = Handler()
 

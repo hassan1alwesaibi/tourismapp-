@@ -12,8 +12,6 @@ import com.bumptech.glide.Glide
 import com.example.tourism.Model.Dto.Users
 import com.example.tourism.R
 import com.example.tourism.ViewModel.UsersViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.auth.User
 
 class UsersRecyclerAdapter(
     val list: List<Users>,
@@ -26,7 +24,7 @@ class UsersRecyclerAdapter(
     ): UsersRecyclerAdapter.UsersViewHolder {
         return UsersViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.itemuser_layout,
+                R.layout.item_user_layout,
                 parent,
                 false
             )
@@ -38,7 +36,7 @@ class UsersRecyclerAdapter(
         val item = list[position]
         holder.fullname.text = item.FirstName +" "+ item.LastName
         holder.email.text = item.Email
-       Glide.with(recontext).load("https://firebasestorage.googleapis.com/v0/b/tourism-1de93.appspot.com/o/${item.UserId}?alt=media&token=052d7e39-d904-4029-ab56-1d39c7e64a69")
+        Glide.with(recontext).load("https://firebasestorage.googleapis.com/v0/b/tourism-1de93.appspot.com/o/${item.UserId}?alt=media&token=052d7e39-d904-4029-ab56-1d39c7e64a69")
            .centerCrop()
            .into(holder.userpicture)
 
@@ -52,7 +50,7 @@ class UsersRecyclerAdapter(
     class UsersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val fullname : TextView =  itemView.findViewById(R.id.fullname_textview)
         val email: TextView = itemView.findViewById(R.id.email_textview)
-        val userpicture:ImageView = itemView.findViewById(R.id.userpicture_ImgeView)
+        val userpicture:ImageView = itemView.findViewById(R.id.pic_ImageView)
     }
 
 }

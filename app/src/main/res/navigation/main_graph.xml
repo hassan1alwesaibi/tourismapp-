@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainFragment_to_userlistFragment"
             app:destination="@id/userlistFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -31,4 +34,9 @@
         android:id="@+id/userlistFragment"
         android:name="com.example.tourism.view.userlistFragment"
         android:label="userlistFragment" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.tourism.view.detailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
 </navigation>
