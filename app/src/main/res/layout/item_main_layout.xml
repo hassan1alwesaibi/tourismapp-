@@ -34,7 +34,7 @@
                 android:textSize="16sp" />
 
             <ImageButton
-                android:id="@+id/Dots_Button"
+                android:id="@+id/Dots_Button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

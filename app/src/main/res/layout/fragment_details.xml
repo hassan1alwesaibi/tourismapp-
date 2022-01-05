@@ -21,7 +21,7 @@
                 android:id="@+id/PictureOfPlace"
                 android:layout_width="match_parent"
                 android:layout_height="197dp"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,13 +40,71 @@
                     android:textSize="16sp" />
 
                 <ImageButton
-                    android:id="@+id/Dots_Button"
+                    android:id="@+id/Dots_Button1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="@color/white"
                     app:srcCompat="@drawable/ic_dots" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="43dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="Business Status:"
+                    android:textColor="@color/olive"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/Business_status"
+                    android:layout_width="352dp"
+                    android:layout_height="43dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Address1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="43dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="Address:"
+                    android:textColor="@color/olive"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/Address"
+                    android:layout_width="352dp"
+                    android:layout_height="43dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

@@ -70,12 +70,13 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
             val address: CollectionModel? = requireArguments().getParcelable("Location")
             val location: Location = address!!.location
-            val Uri = Uri.parse("google.streetview:cbll=${location.lat},${location.lng}")
+            requireArguments().clear()
+            val Uri = Uri.parse("google.navigation:q=${location.lat},${location.lng}")
             val mapIntent = Intent(Intent.ACTION_VIEW, Uri)
             mapIntent.setPackage("com.google.android.apps.maps")
             startActivity(mapIntent)
         }
- //-----------------------------------------------------------------
+ //----------------------------------------------------------------- // to see list of users
         users.setOnClickListener() {
             findNavController().navigate(R.id.action_mainFragment_to_userlistFragment)
         }

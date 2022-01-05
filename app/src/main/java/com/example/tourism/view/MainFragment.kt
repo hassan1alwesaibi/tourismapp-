@@ -4,12 +4,14 @@ import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.EditText
 import android.widget.SeekBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -45,7 +47,8 @@ class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val detailsModel = DetailsModel()
-
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var sharedPreferencesEditor: SharedPreferences.Editor
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -64,6 +67,10 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sharedPreferences = requireActivity().getSharedPreferences("Settings",
+            AppCompatActivity.MODE_PRIVATE
+        )
 
         PlaceAdapter = PlacesRecyclerAdapter(placeViewModel,requireContext(),requireFragmentManager(),requireView()
         )
@@ -117,28 +124,38 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
             val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             builder.setTitle("")
             val view: View = layoutInflater.inflate(R.layout.dialog_seekbar_layout, null)
-//            val valueradius : SeekBar = view.findViewById(R.id.valueSeekBar)
-//            valueradius.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-//                override fun onProgressChanged(
-//                    seekBar: SeekBar?,
-//                    progress: Int,
-//                    fromUser: Boolean
-//                ) {
-//
-//                }
-//
-//                override fun onStartTrackingTouch(seekBar: SeekBar?) {
-//
-//                }
-//
-//                override fun onStopTrackingTouch(seekBar: SeekBar?) {
-//
-//                }
-//            })
+            val valueradius : SeekBar = view.findViewById(R.id.valueSeekBar)
+            val value: TextView = view.findViewById(R.id.value)
+            var startpoint = 0
+            var endpoint = 0
+            valueradius.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                  value.text = progress.toString()
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                    if(seekBar != null){
+                        startpoint = seekBar.progress
+                    }
+
+
+                }
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                    if(seekBar != null){
+                        endpoint = seekBar.progress
+
+                        sharedPreferencesEditor = sharedPreferences.edit()
+                        sharedPreferencesEditor.putInt("seek", endpoint)
+                        sharedPreferencesEditor.commit()
+                    }
+
+                }
+            })
 
             builder.setView(view)
             builder.setPositiveButton("Submit", { _, _ ->
-
+                valueradius.progress
             })
             builder.setNegativeButton("Close", { _, _ -> })
             builder.show()
@@ -176,7 +193,9 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
                 latitude = location.latitude
                 longitude = location.longitude
 
-                placeViewModel.callPlace(latitude, longitude,1000000)
+             val get = sharedPreferences.getInt("seek",1500)
+
+                placeViewModel.callPlace(latitude, longitude,get)
 
                 Log.d("return for location lan", "${location.latitude}")
                 Log.d("result for location lon", "${location.longitude}")

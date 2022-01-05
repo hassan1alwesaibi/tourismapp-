@@ -26,7 +26,7 @@ class PlaceRepository(val context: Context) {
                           radius: Int ) =
         placeApi.getPlaces("$lat,$lng",radius)
 
-    suspend fun saveplaces(places:PlacesModel) = Reference.add(places)
+    //suspend fun saveplaces(places:PlacesModel) = Reference.add(places)
 
     //---------------------------------------------------------------------
     /***

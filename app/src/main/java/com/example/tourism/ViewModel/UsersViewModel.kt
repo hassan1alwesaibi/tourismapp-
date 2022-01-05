@@ -8,14 +8,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tourism.Model.Dto.Users
-import com.example.tourism.Model.PlaceModel.Result
-import com.example.tourism.Repostries.PlaceRepository
-import com.example.tourism.Repostries.UsersRepository
-import com.google.firebase.auth.FirebaseAuth
+import com.example.tourism.Repostries.FireRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -31,7 +27,7 @@ class UsersViewModel : ViewModel() {
     val usersErrorLiveData = MutableLiveData<String>()
     val getlistUserLiveData = MutableLiveData<List<Users>>()
 
-    private val apiRepo = UsersRepository.get()
+    private val apiRepo = FireRepository.get()
     private var firestore: FirebaseFirestore
 
     init {

@@ -22,20 +22,17 @@ import com.example.tourism.ViewModel.PlaceViewModel
 
 import android.os.Bundle
 import androidx.navigation.Navigation.findNavController
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 
 import com.example.tourism.Model.Dto.CollectionModel
 import com.example.tourism.Model.Dto.DetailsModel
 
 
-lateinit var details:DetailsModel  // ask
 
 class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
                             val fileContext: Context,val fragmentManager:FragmentManager, val view:View) :
     RecyclerView.Adapter<PlacesRecyclerAdapter.PlacesViewHolder>() {
-
-    var sheetDialog = BottomSheetFragment()
+    var bottomsheetDialog = BottomSheetFragment()
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Result>() {
         override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
             return oldItem.placeId == newItem.placeId
@@ -84,30 +81,24 @@ class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
             holder.nameOfPlace.text = item.name
 //-------------------------------------------------------------when press in pic show details and comment
             holder.pictureOfPlace.setOnClickListener {
-                details = DetailsModel(
-                    imgLink,
-                    item.name,
-                    item.businessStatus.toString(),
-                    item.vicinity.toString(),
-                    item.rating ?: 0.0,
-                    item.placeId!!
-                )
                 val bundle = Bundle()
-                bundle.putParcelable("details",details)//ask
+                bundle.putParcelable("bitmap", getBitmapFromView(holder.pictureOfPlace))
+                bundle.putParcelable("Location",collection)
+                bundle.putParcelable("details",details(item,imgLink))//ask
                 findNavController(view).navigate(R.id.action_mainFragment_to_detailsFragment,bundle)
             }
   //--------------------------------------------------------------- when press in 3dots open bottom sheet
-
         holder.Dots_Button.setOnClickListener {
             val bundle = Bundle()
+
             //pass information to another fragment
             bundle.putParcelable("bitmap", getBitmapFromView(holder.pictureOfPlace))
             bundle.putParcelable("Location",collection)
-            bundle.putParcelable("details",details)
+            bundle.putParcelable("details",details(item,imgLink))
 
 
-            sheetDialog.arguments = bundle
-            sheetDialog.show(fragmentManager,"")
+            bottomsheetDialog.arguments = bundle
+            bottomsheetDialog.show(fragmentManager,"")
 
    }
 
@@ -128,9 +119,20 @@ class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
     class PlacesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var pictureOfPlace: ImageView = itemView.findViewById(R.id.PictureOfPlace)
         val nameOfPlace: TextView = itemView.findViewById(R.id.NameOfPlace)
-        val Dots_Button:ImageButton = itemView.findViewById(R.id.Dots_Button)
+        val Dots_Button:ImageButton = itemView.findViewById(R.id.Dots_Button1)
 
     }
+    open fun details(item:Result,imgLink:String) = DetailsModel(
+            imgLink,
+            item.name!!,
+            item.businessStatus.toString(),
+            item.vicinity.toString(),
+            item.rating ?: 0.0,
+            item.placeId!!
+        )
+
+
+
 
 }
 
