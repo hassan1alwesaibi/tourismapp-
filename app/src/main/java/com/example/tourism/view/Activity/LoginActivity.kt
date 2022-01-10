@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.tourism.R
+import com.example.tourism.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -21,24 +22,16 @@ lateinit var sharedPreferences: SharedPreferences
 lateinit var sharedPreferencesEditor: SharedPreferences.Editor
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
         super.onCreate(savedInstanceState)
-
-
-
-        setContentView(R.layout.activity_login)
-        val emailAddress_EditText: EditText = findViewById(R.id.Emaillogin_EditText)
-        val password_EditText: EditText = findViewById(R.id.Passwordlogin_EditText)
-        val login_button: Button = findViewById(R.id.LogIn_Button)
-        val register_TextView: TextView = findViewById(R.id.SingUp_TextView)
-        val ForgetPassword: TextView = findViewById(R.id.ForgetPassword)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 //---------------------------------------------------------------------call forgetPassword dialog
-        ForgetPassword.setOnClickListener() {
+        binding.ForgetPassword.setOnClickListener() {
             val builder: AlertDialog.Builder = AlertDialog.Builder(this)
             builder.setTitle("Forget Password")
-
             val view: View = layoutInflater.inflate(R.layout.dialog_forgetpassworf, null)
             val username: EditText = view.findViewById(R.id.username)
             builder.setView(view)
@@ -49,16 +42,15 @@ class LoginActivity : AppCompatActivity() {
             builder.show()
 
         }
-//--------------------------------------------------------------------------
-
-        register_TextView.setOnClickListener() {
+//--------------------------------------------if click in it will open register activity
+        binding.SingUpTextView.setOnClickListener() {
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }
 //---------------------------------------------------------------------------
-        login_button.setOnClickListener() {
-            val email: String = emailAddress_EditText.text.toString()
-            val password: String = password_EditText.text.toString()
+        binding.LogInButton.setOnClickListener() {
+            val email: String = binding.EmailloginEditText.text.toString()
+            val password: String = binding.PasswordloginEditText.text.toString()
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 FirebaseAuth.getInstance()
                     .signInWithEmailAndPassword(email, password).addOnCompleteListener() {
@@ -91,13 +83,12 @@ class LoginActivity : AppCompatActivity() {
                             ).show()
                         }
                     }
-
             }
         }
 
 
     }
-
+//-------------------------------- for forgetpassword and will resive email from it
     private fun forgetpassword(username: EditText) {
         if (username.text.toString().isEmpty()) {
             return

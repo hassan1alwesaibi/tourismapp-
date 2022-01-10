@@ -15,7 +15,7 @@ import com.example.tourism.databinding.ActivitySplashBinding
 
 
 class splashActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySplashBinding
+
     private var mDelayHandler: Handler? = null
     private val splashLong: Long = 2000 //2seconds
     internal val mRunnable: Runnable = Runnable {

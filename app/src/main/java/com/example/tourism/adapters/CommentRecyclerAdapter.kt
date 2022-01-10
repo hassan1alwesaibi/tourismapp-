@@ -34,28 +34,23 @@ class CommentRecyclerAdapter(val list: List<CommentsModel>,val picContext: Conte
         val item = list[position]
         holder.comment.text = item.comments
         val apiRepo = FireRepository.get()
-
-
-            // Get user details by comments
+        // Get user details by comments
             val res = apiRepo.getUserDatabyId(item.UserId)
                     res.addOnSuccessListener { document ->
                     val user = document.toObject<Users>(Users::class.java)
                     holder.fullname.text = user?.FirstName + " " + user?.LastName
                     var img = "https://firebasestorage.googleapis.com/v0/b/tourism-1de93.appspot.com/o/${item.UserId}?alt=media&token=b0f9dab3-5624-4026-bbae-9647629bf634"
                     Glide.with(picContext)
-
-                            .load(img)
-                            .centerCrop()
+                        .load(img)
+                        .centerCrop()
                         .skipMemoryCache(false)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .into(holder.userpicture)
-
-
-
-                    Log.d(TAG, user.toString())
-                    Log.d(TAG, ".............")
+                        .into(holder.userpicture)
+                        Log.d(TAG, user.toString())
+                        Log.d(TAG, ".............")
                 }.addOnFailureListener(){
-                    Log.d(TAG, it.message.toString())        }
+                    Log.d(TAG, it.message.toString())
+                }
 
     }
     override fun getItemCount(): Int {

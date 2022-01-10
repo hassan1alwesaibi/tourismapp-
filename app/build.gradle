@@ -2,10 +2,9 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services'
+    id 'kotlin-parcelize'
 }
 // Parcelable data class
-apply plugin: 'org.jetbrains.kotlin.android.extensions'
-
 
 android {
     compileSdk 31
@@ -38,10 +37,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-
-    androidExtensions {
-        experimental = true
-    }
 }
 
 dependencies {
@@ -73,7 +68,6 @@ dependencies {
     // To use Room local database in your app, You need the following dependencies:
     implementation "androidx.room:room-runtime:2.3.0"
     implementation "androidx.room:room-ktx:2.3.0"
-
 
 
 

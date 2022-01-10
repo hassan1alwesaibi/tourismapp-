@@ -3,7 +3,7 @@ package com.example.tourism.Repostries
 import android.content.Context
 import com.example.tourism.Api.IPlacesApi
 import com.example.tourism.Model.Dto.DetailsModel
-import com.example.tourism.Model.Dto.PlacesModel
+
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import retrofit2.Retrofit
@@ -23,10 +23,15 @@ class PlaceRepository(val context: Context) {
    // get places from places Model
     suspend fun getPlaces(lat: Double,
                           lng: Double,
-                          radius: Int ) =
-        placeApi.getPlaces("$lat,$lng",radius)
+                          radius: Int,
+                          pageToken:String) =
+        placeApi.getPlaces("$lat,$lng",radius,pageToken)
+   // text search for places
+    suspend fun searchPlaces(query: String) =
+        placeApi.searchPlaces(query)
 
-    //suspend fun saveplaces(places:PlacesModel) = Reference.add(places)
+
+
 
     //---------------------------------------------------------------------
     /***

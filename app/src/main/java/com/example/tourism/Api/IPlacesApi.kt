@@ -1,7 +1,8 @@
 package com.example.tourism.Api
 
 
-import com.example.tourism.Model.PlaceModel.Places
+import com.example.tourism.Model.PlaceModel.PlacesModel
+import com.example.tourism.Model.PlaceModel.SearchModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,6 +12,11 @@ interface IPlacesApi {
     suspend fun getPlaces(
         @Query("location") location: String,
         @Query("radius") radius: Int,
-        // @Query("types")types:String
-    ): Response<Places>
+        @Query("pageToken")pageToken:String
+    ): Response<PlacesModel>
+    @GET("/maps/api/place/textsearch/json?key=AIzaSyAswnygZzJMdw9uEJ21KM5ZTLiAFj7Fogc")
+
+    suspend fun searchPlaces(
+        @Query("query") query: String,
+    ):Response<SearchModel>
 }

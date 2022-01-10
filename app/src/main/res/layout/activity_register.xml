@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Floral_White"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".view.Activity.RegisterActivity">
 
@@ -16,7 +16,7 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/arizonia"
         android:text="@string/register"
-        android:textColor="@color/black"
+        android:textColor="@color/olive"
         android:textSize="50sp" />
 
     <TextView
@@ -26,23 +26,24 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
-        android:text="@string/first_name"
         android:fontFamily="@font/oregano"
-        android:textColor="@color/black"
+        android:text="@string/first_name"
+        android:textColor="@color/olive"
         android:textSize="16sp" />
 
     <EditText
         android:id="@+id/firstname_EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="@color/white"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/bar"
+        android:ems="10"
+        android:inputType="textPersonName"
         android:minHeight="45dip"
         android:padding="5dp" />
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="match_parent"
@@ -50,22 +51,24 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="@string/last_name"
         android:fontFamily="@font/oregano"
+        android:text="@string/last_name"
         android:textColor="@color/black"
         android:textSize="16sp" />
+
     <EditText
         android:id="@+id/lastname_EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="@color/white"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/bar"
+        android:ems="10"
+        android:inputType="textPersonName"
         android:minHeight="45dip"
         android:padding="5dp" />
+
     <TextView
         android:id="@+id/textView7"
         android:layout_width="match_parent"
@@ -73,10 +76,11 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="@string/email_address"
         android:fontFamily="@font/oregano"
-        android:textColor="@color/black"
+        android:text="@string/email_address"
+        android:textColor="@color/olive"
         android:textSize="16sp" />
+
     <EditText
         android:id="@+id/Email_EditText"
         android:layout_width="match_parent"
@@ -85,11 +89,12 @@
         android:layout_marginRight="30dp"
 
         android:background="@color/white"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/bar"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:minHeight="45dip"
         android:padding="5dp" />
+
     <TextView
         android:id="@+id/textView8"
         android:layout_width="match_parent"
@@ -97,10 +102,11 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="@string/password"
         android:fontFamily="@font/oregano"
-        android:textColor="@color/black"
+        android:text="@string/password"
+        android:textColor="@color/olive"
         android:textSize="16sp" />
+
     <EditText
         android:id="@+id/Password_EditText"
         android:layout_width="match_parent"
@@ -108,11 +114,12 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="@color/white"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/bar"
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="45dip"
         android:padding="5dp" />
+
     <TextView
         android:id="@+id/textView9"
         android:layout_width="match_parent"
@@ -120,18 +127,19 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="@string/confirm_password"
         android:fontFamily="@font/oregano"
-        android:textColor="@color/black"
+        android:text="@string/confirm_password"
+        android:textColor="@color/olive"
         android:textSize="16sp" />
+
     <EditText
         android:id="@+id/ConfirmPassword_EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="@color/white"
-        android:backgroundTint="@color/white"
+        android:background="@color/bar"
+        android:backgroundTint="@color/bar"
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="45dip"
@@ -145,10 +153,11 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="15dp"
         android:backgroundTint="@color/olive"
-        android:text="@string/sign_up"
         android:fontFamily="@font/oregano"
+        android:text="@string/sign_up"
         android:textColor="@color/white"
         android:textSize="16sp" />
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"

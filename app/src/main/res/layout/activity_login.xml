@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Floral_White"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".view.Activity.LoginActivity">
 
@@ -17,7 +17,7 @@
         android:fontFamily="@font/arizonia"
         android:gravity="center"
         android:text="@string/welcome"
-        android:textColor="@color/black"
+        android:textColor="@color/olive"
         android:textSize="50sp" />
 
     <EditText
@@ -28,7 +28,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginBottom="20dp"
         android:background="@color/white"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/bar"
         android:ems="10"
         android:hint="@string/e_mail"
         android:inputType="textEmailAddress"
@@ -42,7 +42,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="@color/white"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/bar"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -69,8 +69,8 @@
         android:layout_marginTop="45dp"
         android:layout_marginRight="15dp"
         android:backgroundTint="@color/olive"
-        android:text="@string/log_in"
         android:fontFamily="@font/oregano"
+        android:text="@string/log_in"
         android:textColor="@color/white"
         android:textSize="16sp" />
 

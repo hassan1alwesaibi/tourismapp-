@@ -20,6 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.tourism.Model.Dto.Users
 import com.example.tourism.R
 import com.example.tourism.ViewModel.UsersViewModel
+import com.example.tourism.databinding.FragmentProfileBinding
 import com.example.tourism.view.Activity.LoginActivity
 import com.example.tourism.view.Activity.sharedPreferences
 import com.example.tourism.view.Activity.sharedPreferencesEditor
@@ -29,25 +30,14 @@ import com.google.firebase.ktx.Firebase
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
-import java.io.File
 
 
 class profileFragment : Fragment() {
-
     private val IMAGE_PICKER = 0
     private var users = Users()
     private val usersViewModel: UsersViewModel by activityViewModels()
+    private lateinit var binding: FragmentProfileBinding
     private lateinit var progressDialog: ProgressDialog
-    private lateinit var firstName: EditText
-    private lateinit var lastName: EditText
-    private lateinit var email: EditText
-    private lateinit var imge: ImageView
-    private lateinit var gender: EditText
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,51 +47,41 @@ class profileFragment : Fragment() {
         progressDialog.setTitle("Loading...")
         progressDialog.setCancelable(false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        binding =  FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        firstName = view.findViewById(R.id.firstnamep_edittext)
-        lastName = view.findViewById(R.id.lastnamep_edittext)
-        email = view.findViewById(R.id.emailp_edittext)
-        gender = view.findViewById(R.id.gender_EditText)
-        var delete: LinearLayout = view.findViewById(R.id.deleteaccount)
-        val cancel: ImageButton = view.findViewById(R.id.cancelBtn)
-        var addittoggleButton: ToggleButton = view.findViewById(R.id.addittoggleButton)
-
-        imge = view.findViewById(R.id.profil_picture)
-
-        cancel.setOnClickListener {
+  //--------------------------------------- // to close profile and go to main fragment
+        binding.close.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_mainFragment)
         }
-        addittoggleButton.setOnClickListener {
-            if (addittoggleButton.isChecked) {
-                delete.isVisible = true
-                imge.isEnabled = true
-                firstName.isEnabled = true
-                lastName.isEnabled = true
-                // email.isEnabled = true
-                gender.isEnabled = true
+   //--------------------------------------------// when press to edit let you allow to change information
+        binding.edittoggleButton.setOnClickListener {
+            if (binding.edittoggleButton.isChecked) {
+                binding.deleteaccount.isVisible = true
+                binding.profilPicture.isEnabled = true
 
-
+                binding.profilPicture.setOnClickListener {
+                    ImagePicker()
+                }
+                binding.firstnamepEdittext.isEnabled = true
+                binding.lastnamepEdittext.isEnabled = true
+                binding.genderEditText.isEnabled = true
             } else {
-                delete.isVisible = false
-                imge.isEnabled = false
-                firstName.isEnabled = false
-                lastName.isEnabled = false
-                // email.isEnabled = false
-                email.isEnabled = false
-                gender.isEnabled = false
-                saveaddite()
+                binding.deleteaccount.isVisible = false
+                binding.profilPicture.isEnabled = false
+                binding.firstnamepEdittext.isEnabled = false
+                binding.lastnamepEdittext.isEnabled = false
+                binding.genderEditText.isEnabled = false
+                saveaddite() // save change
             }
         }
-//-----------------------------------------------------
-        delete.setOnClickListener {
+//-----------------------------------------------------// to delet account
+        binding.deleteaccount.setOnClickListener {
             val alertDialog = android.app.AlertDialog.Builder(context).setTitle("Delete account")
                 .setMessage(
                     "Are you sure? All flights and information will be deleted." +
-                            "That can't be undone"
-                )
+                            "That can't be undone")
             alertDialog.setPositiveButton("Delete") { _, _ ->
                 Log.i(ContentValues.TAG, "Delete")
                 usersViewModel.deleteuser()
@@ -134,20 +114,10 @@ class profileFragment : Fragment() {
             }
             alertDialog.show()
         }
-        imge.setOnClickListener {
-            ImagePicker()
-        }
-
-
-        showPic()
-
-        observers()
-        usersViewModel.getUser()
-
-
-
-
-
+//-------------------------------------
+        showPic()//call
+        observers()//call
+        usersViewModel.getUser()//call
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -177,16 +147,17 @@ class profileFragment : Fragment() {
             .skipMemoryCache(true)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .placeholder(R.drawable.userprofile)
-            .into(imge)
+            .into(binding.profilPicture)
     }
 
-    //----------------------------------------------------------------------------------update data
+
+    //-------------------------------------------------------------------------save edit
     fun saveaddite() {
         users.apply {
-            FirstName = firstName.text.toString()
-            LastName = lastName.text.toString()
-            Email = email.text.toString()
-            Gender = gender.text.toString()
+            FirstName = binding.firstnamepEdittext.text.toString()
+            LastName = binding.lastnamepEdittext.text.toString()
+            Email =    binding.emailpEdittext.text.toString()
+            Gender = binding.genderEditText.text.toString()
 
             usersViewModel.save(users)
         }
@@ -195,23 +166,19 @@ class profileFragment : Fragment() {
     //---------------------------------------------------------------------------------
     fun observers() {
         usersViewModel.getUserLiveDate.observe(viewLifecycleOwner, {
-            firstName.setText(it.FirstName)
-            lastName.setText(it.LastName)
-            email.setText(it.Email)
-            gender.setText(it.Gender)
+            binding.firstnamepEdittext.setText(it.FirstName)
+            binding.lastnamepEdittext.setText(it.LastName)
+            binding.emailpEdittext.setText(it.Email)
+            binding.genderEditText.setText(it.Gender)
             Log.d(ContentValues.TAG, it.toString())
         })
         usersViewModel.UploadPhotosersLiveDate.observe(viewLifecycleOwner, {
             showPic()
             progressDialog.dismiss()
-
         })
         usersViewModel.saveusersLiveDate.observe(viewLifecycleOwner, {
-
-
         })
         usersViewModel.deleUserLiveDate.observe(viewLifecycleOwner, {
-
         })
     }
 

@@ -3,48 +3,43 @@ package com.example.tourism.view.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.tourism.Model.Dto.Users
-import com.example.tourism.R
 import com.example.tourism.ViewModel.UsersViewModel
+import com.example.tourism.databinding.ActivityRegisterBinding
 import com.example.tourism.until.RegisterValidations
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 
 class RegisterActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRegisterBinding
     private var users = Users()
     private  val usersViewModel: UsersViewModel by viewModels()
     private val validator = RegisterValidations()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-        val firstname: EditText = findViewById(R.id.firstname_EditText)
-        val lastname: EditText = findViewById(R.id.lastname_EditText)
-        val emailAddress: EditText = findViewById(R.id.Email_EditText)
-        val password: EditText = findViewById(R.id.Password_EditText)
-        val confirmpassword: EditText = findViewById(R.id.ConfirmPassword_EditText)
-        val registerButton: Button = findViewById(R.id.SingUp_button)
-        val loginTextView: TextView = findViewById(R.id.SingIn_textView)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 
-        loginTextView.setOnClickListener() {
+// when press it will open login activity
+        binding.SingInTextView.setOnClickListener() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
-        registerButton.setOnClickListener() {
-            val fname: String = firstname.text.toString()
-            val lname: String = lastname.text.toString()
-            val email: String = emailAddress.text.toString()
-            val passwor: String = password.text.toString()
-            val conpassword: String = confirmpassword.text.toString()
+ //-------------------------------------------------------------------------------------------
+   // after fill it will save your information in firebase
+        binding.SingUpButton.setOnClickListener() {
+            val firstname: String = binding.firstnameEditText.text.toString()
+            val lastname: String = binding.lastnameEditText.text.toString()
+            val email: String = binding.EmailEditText.text.toString()
+            val passwor: String = binding.PasswordEditText.text.toString()
+            val conpassword: String = binding.ConfirmPasswordEditText.text.toString()
 
-            if (fname.isNotBlank() && lname.isNotBlank() && email.isNotBlank() && passwor.isNotBlank() && conpassword.isNotBlank()) {
+            if (firstname.isNotBlank() && lastname.isNotBlank() && email.isNotBlank() && passwor.isNotBlank() && conpassword.isNotBlank()) {
                 if (passwor == conpassword) {
                     if (validator.emailIsValid(email)) {
                         if (validator.passwordIsValid(passwor)) {
@@ -55,8 +50,8 @@ class RegisterActivity : AppCompatActivity() {
                                         val firebaseUser: FirebaseUser = it.result!!.user!!
 
                                         users.apply {
-                                            FirstName = fname
-                                            LastName = lname
+                                            FirstName = firstname
+                                            LastName = lastname
                                             Email = email
                                             usersViewModel.save(users)
                                         }
@@ -67,29 +62,6 @@ class RegisterActivity : AppCompatActivity() {
                                         sharedPreferencesEditor.putBoolean("isUserLogin", true)
                                         sharedPreferencesEditor.putString("UsserID", FirebaseAuth.getInstance().uid.toString())
                                         sharedPreferencesEditor.commit()
-
-                                        // Store the information in the user collection
-//                                        val db = Firebase.firestore
-//
-//                                        val user = hashMapOf(
-//                                            "first" to fname,
-//                                            "last" to lname,
-//                                            "userId" to firebaseUser.uid
-//                                        )
-//                                        db.collection("users")
-//                                            .add(user)
-//                                            .addOnSuccessListener { documentReference ->
-//                                                Log.d(
-//                                                    TAG,
-//                                                    "DocumentSnapshot added with ID: ${documentReference.id}"
-//                                                )
-//                                            }
-//                                            .addOnFailureListener { e ->
-//                                                Log.w(TAG, "Error adding document", e)
-//                                            }
-
-
-
 
                                         Toast.makeText(
                                             this,

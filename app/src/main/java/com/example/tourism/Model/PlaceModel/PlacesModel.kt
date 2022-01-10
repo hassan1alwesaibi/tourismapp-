@@ -3,9 +3,7 @@ package com.example.tourism.Model.PlaceModel
 
 import com.google.gson.annotations.SerializedName
 
-data class Places(
-//    @SerializedName("html_attributions")
-//    val htmlAttributions: List<Any>,
+data class PlacesModel(
     @SerializedName("next_page_token")
     val nextPageToken: String,
     @SerializedName("results")

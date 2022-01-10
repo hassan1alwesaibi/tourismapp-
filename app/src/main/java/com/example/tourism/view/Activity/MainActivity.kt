@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ), LOCATION_PERMISSION_REQ_CODE
         )
+
+
     }
 
 
