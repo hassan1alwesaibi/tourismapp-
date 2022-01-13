@@ -24,7 +24,7 @@ import com.example.tourism.ViewModel.PlaceViewModel
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.navigation.Navigation.findNavController
-
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 
 import com.example.tourism.Model.Dto.DetailsModel
@@ -74,6 +74,7 @@ class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
                     Glide.with(fileContext)
                         .load(imgLink)
                         .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(holder.pictureOfPlace)
                 }
             holder.nameOfPlace.text = item.name
@@ -127,7 +128,7 @@ class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
         bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
         val path =
             MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
-        return Uri.parse(path.toString())
+        return Uri.parse(path!!.toString())
     }
 
 

@@ -155,6 +155,7 @@ class profileFragment : Fragment() {
     fun saveaddite() {
         users.apply {
             FirstName = binding.firstnamepEdittext.text.toString()
+
             LastName = binding.lastnamepEdittext.text.toString()
             Email =    binding.emailpEdittext.text.toString()
             Gender = binding.genderEditText.text.toString()

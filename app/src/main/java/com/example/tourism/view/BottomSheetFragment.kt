@@ -47,7 +47,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val detail: DetailsModel? = requireArguments().getParcelable("details")
+       val detail: DetailsModel? = requireArguments().getParcelable("details")
 //---------------------------------------------------------------------to share photo of places to anthor app
         binding.shared.setOnClickListener() {
 
@@ -55,6 +55,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             intent.type = "image/*"
             intent.putExtra(Intent.EXTRA_STREAM, detail!!.bitmap)
             context?.startActivity(Intent.createChooser(intent, "Share"))
+            dismiss()
         }
  //----------------------------------------------------------------------------to open goole map
         binding.getAddress.setOnClickListener() {
@@ -64,10 +65,12 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             val mapIntent = Intent(Intent.ACTION_VIEW, Uri)
             mapIntent.setPackage("com.google.android.apps.maps")
             startActivity(mapIntent)
+            dismiss()
         }
  //----------------------------------------------------------------- // to see list of users
         binding.users.setOnClickListener() {
             findNavController().navigate(R.id.action_mainFragment_to_userlistFragment)
+            dismiss()
         }
 
  //--------------------------------------------------------------------for add cooment
@@ -75,21 +78,30 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         binding.comments.setOnClickListener() {
             val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Add Comments")
+            builder.setCancelable(false)
            // receive
             val view: View = layoutInflater.inflate(R.layout.dialog_comments, null)
             val comments: EditText = view.findViewById(R.id.dialog_comment)
 
             builder.setView(view)
+
             builder.setPositiveButton("Add", { _, _ ->
               //save comment to commentsModel
                 bottonsheetViewModel.save(detail!!.placeId, comments.text.toString())
+                this@BottomSheetFragment.dismiss()
             })
-            builder.setNegativeButton("Cancel", { _, _ -> })
-            builder.show()
+            builder.setNegativeButton("Cancel", { _, _ ->
+                this@BottomSheetFragment.dismiss()
+            })
+
+           builder.show()
+
+
 
         }
 //----------------------------------------------------------------------------
     }
+
 
 }
 

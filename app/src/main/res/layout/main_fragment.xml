@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
+            android:background="@color/bar"
             app:contentScrim="@color/olive"
             app:layout_scrollFlags="scroll|enterAlways"
             app:menu="@menu/toolbar"
@@ -34,7 +34,7 @@
         android:id="@+id/MainViewRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/olive"
+        android:background="@color/bar"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

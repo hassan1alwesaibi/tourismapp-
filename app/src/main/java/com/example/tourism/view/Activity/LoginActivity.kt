@@ -55,10 +55,11 @@ class LoginActivity : AppCompatActivity() {
                 FirebaseAuth.getInstance()
                     .signInWithEmailAndPassword(email, password).addOnCompleteListener() {
                         if (it.isSuccessful) {
-                            sharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE)
+                            //sharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE)
                             sharedPreferencesEditor = sharedPreferences.edit()
                             sharedPreferencesEditor.putBoolean("isUserLogin", true)
                             sharedPreferencesEditor.commit()
+
                             val firebaseUser: FirebaseUser = it.result!!.user!!
                             Toast.makeText(
                                 this, "User Logged in  " +

@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:shadowColor="@color/olive"
+        android:text="1500" />
+
     <SeekBar
         android:id="@+id/valueSeekBar"
         android:layout_width="match_parent"

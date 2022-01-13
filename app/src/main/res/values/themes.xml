@@ -16,12 +16,12 @@
 
 
     <style name="Splash" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:statusBarColor" tools:targetApi="l">@color/olive</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/bar</item>
         <item name="android:windowLightStatusBar">true</item>
 
     </style>
     <style name="main" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:statusBarColor" tools:targetApi="l">@color/olive</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/bar</item>
         <item name="android:windowLightStatusBar">true</item>
 
     </style>

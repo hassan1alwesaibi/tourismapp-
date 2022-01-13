@@ -18,25 +18,15 @@ class splashActivity : AppCompatActivity() {
 
     private var mDelayHandler: Handler? = null
     private val splashLong: Long = 2000 //2seconds
-    internal val mRunnable: Runnable = Runnable {
-        if (!isFinishing) {
 
-            sharedPreferences = this.getSharedPreferences("Settings", Context.MODE_PRIVATE)
-            if (sharedPreferences.getBoolean("isUserLogin", false)) {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            } else {
-                val intent = Intent(applicationContext, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-
-
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
+
+
+
 
         PlaceRepository.init(this)
         FireRepository.init(this)
@@ -44,15 +34,23 @@ class splashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         mDelayHandler = Handler()
 
-        mDelayHandler!!.postDelayed(mRunnable, splashLong)
+        mDelayHandler!!.postDelayed({
+            sharedPreferences = getSharedPreferences("Setting", Context.MODE_PRIVATE)
+            if (sharedPreferences.getBoolean("isUserLogin", false)) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+
+            } else {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }, splashLong)
 
     }
 
     public override fun onDestroy() {
-
-        if (mDelayHandler != null) {
-            mDelayHandler!!.removeCallbacks(mRunnable)
-        }
 
         super.onDestroy()
     }

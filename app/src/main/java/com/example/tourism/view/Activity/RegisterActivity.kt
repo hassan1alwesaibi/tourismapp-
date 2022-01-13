@@ -1,19 +1,33 @@
 package com.example.tourism.view.Activity
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.tourism.Model.Dto.Users
+import com.example.tourism.R
 import com.example.tourism.ViewModel.UsersViewModel
 import com.example.tourism.databinding.ActivityRegisterBinding
 import com.example.tourism.until.RegisterValidations
+import com.example.tourism.view.profileFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 
 class RegisterActivity : AppCompatActivity() {
+    lateinit var notificationManager: NotificationManager
+    lateinit var notificationChannel: NotificationChannel
+    lateinit var nbuilder: Notification.Builder
+    private val channelId = "i.apps.notifications"
+    private val description = "Test notification"
     private lateinit var binding: ActivityRegisterBinding
     private var users = Users()
     private  val usersViewModel: UsersViewModel by viewModels()
@@ -56,7 +70,7 @@ class RegisterActivity : AppCompatActivity() {
                                             usersViewModel.save(users)
                                         }
 
-
+                                        notification()
                                         sharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE)
                                         sharedPreferencesEditor = sharedPreferences.edit()
                                         sharedPreferencesEditor.putBoolean("isUserLogin", true)
@@ -96,7 +110,37 @@ class RegisterActivity : AppCompatActivity() {
             } else
                 Toast.makeText(this, "Registration fields must not be empty", Toast.LENGTH_SHORT)
                     .show()
+
         }
+
+    }
+    // for notification
+    fun notification(){
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
+            notificationChannel.enableLights(true)
+
+            notificationChannel.enableVibration(false)
+            notificationManager.createNotificationChannel(notificationChannel)
+
+            val intent:Intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("Notification", true)
+
+            val pendingIntent = PendingIntent.getActivity(this, 444, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            nbuilder = Notification.Builder(this, channelId)
+                .setSmallIcon(R.drawable.ic_place)
+                .setContentTitle("Update profile")
+                .setContentIntent(pendingIntent)
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_place))
+        } else {
+
+            nbuilder = Notification.Builder(this)
+                .setSmallIcon(R.drawable.ic_place)
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_place))
+        }
+        notificationManager.notify(1234, nbuilder.build())
 
     }
 

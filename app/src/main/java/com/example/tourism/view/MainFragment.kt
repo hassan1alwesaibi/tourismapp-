@@ -47,8 +47,12 @@ class MainFragment : Fragment() {
 
   //-------------------------------------------------------------------------------------
     override fun onCreate(savedInstanceState: Bundle?) {
+       Log.d(TAG,"onCreate")
         super.onCreate(savedInstanceState)
-        arguments?.let {
+      fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+    getCurrentLocation()
+
+      arguments?.let {
 
         }
         setHasOptionsMenu(true)
@@ -58,6 +62,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+    Log.d(TAG,"onCreateView")
         binding =  MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -65,13 +70,16 @@ class MainFragment : Fragment() {
 //--------------------------------------------------------------------------------------
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+    Log.d(TAG,"onViewCreated")
     sharedPreferences = requireActivity().getSharedPreferences("Settings", AppCompatActivity.MODE_PRIVATE)
     PlaceAdapter = PlacesRecyclerAdapter(placeViewModel,requireContext(),requireFragmentManager(),requireView())
     binding.MainViewRecyclerView.adapter = PlaceAdapter
-    fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-    getCurrentLocation() // call
-    observers()// call
+   // fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+//    getCurrentLocation() // call
+//    PlaceAdapter.notifyDataSetChanged()
+//    val get = sharedPreferences.getInt("seek",1500)
+//    placeViewModel.callPlace(26.394579, 50.194706,get)
+   observers()// call
 //--------------------------------------------------------------------------------------
     // for refresh page
     binding.swiperefreshlayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener(){
@@ -84,23 +92,65 @@ class MainFragment : Fragment() {
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
         (activity as AppCompatActivity?)!!.supportActionBar!!.title = ""
 
-
-    binding.MainViewRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener()
-    {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-            if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE){
-
-
-                getCurrentLocation()
-                Log.d(TAG, "fuc")
-            }
-        }
-
-    })
+// for paging
+//    binding.MainViewRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener()
+//    {
+//        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//            super.onScrollStateChanged(recyclerView, newState)
+//            if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE){
+//
+//
+//                getCurrentLocation()
+//                Log.d(TAG, "fuc")
+//            }
+//        }
+//
+//    })
 
     }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        Log.d(TAG,"onViewStateRestored")
+        super.onViewStateRestored(savedInstanceState)
+    }
+
+    override fun onStart() {
+        Log.d(TAG,"onStart")
+        super.onStart()
+    }
+
+    override fun onResume() {
+        Log.d(TAG,"onResume")
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Log.d(TAG,"onPause")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Log.d(TAG,"onStop")
+        super.onStop()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.d(TAG,"onSaveInstanceState")
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onDestroyView() {
+        Log.d(TAG,"onDestroyView")
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        Log.d(TAG,"onDestroy")
+        super.onDestroy()
+    }
     //-------------------------------------------------------------------------------
+
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
         requireActivity().menuInflater.inflate(R.menu.toolbar, menu)
@@ -149,11 +199,12 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
                 val intent = Intent(it.requireActivity(), LoginActivity::class.java)
                 it.startActivity(intent)
             }
-            requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE)
+            sharedPreferences = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE)
             sharedPreferencesEditor = sharedPreferences.edit()
-            sharedPreferencesEditor.remove("isUserLogin")
+
+           sharedPreferencesEditor.putBoolean("isUserLogin",false)
             sharedPreferencesEditor.commit()
-            requireActivity().finish()
+
         }
         alertDialog.setNegativeButton("Cancel") { dialog, _ ->
             dialog.cancel()
@@ -179,6 +230,8 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
             valueradius.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+
+
                     Log.d("SeekBarValue", seekBar?.progress.toString())
                     if(seekBar != null){
                         startpoint = seekBar.progress
@@ -216,15 +269,15 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
             PlaceAdapter.submitList(it)
 
-            Log.d(TAG, it.toString())
+          //  Log.d(TAG, it.toString())
         })
 
 
     }
 //----------------------------------------------------------------------------------------------------
      private fun getCurrentLocation() {
-        Log.d("value current lan", "${latitude}")
-        Log.d("result current lon", "${longitude}")
+     //   Log.d("value current lan", "${latitude}")
+        //Log.d("result current lon", "${longitude}")
         println(latitude)
         println(longitude)
         if (checkSelfPermission(
@@ -232,7 +285,7 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            Log.d("MainActivityFragment", "sdfsdfsdfsdfsdfds")
+         //   Log.d("MainActivityFragment", "sdfsdfsdfsdfsdfds")
 
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                 // getting the last known or current location
@@ -243,12 +296,7 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
                 placeViewModel.callPlace(latitude, longitude,get)
 
-                Log.d("return for location lan", "${location.latitude}")
-                Log.d("result for location lon", "${location.longitude}")
-
-                Log.d("return for lan", "${latitude}")
-                Log.d("result for lon", "${longitude}")
-
+//------------------------------------------------------------------------------------------
             }
                 .addOnFailureListener {
                     Toast.makeText(
@@ -256,26 +304,25 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
         } else {
             requestPermissions(
                 arrayOf(
                     Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ), LOCATION_PERMISSION_REQ_CODE
             )
         }
     }
 
-    // for paremissions--------------------------------------------------------
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        Log.d(TAG, "onRequestPermissionsResult")
-//
-//    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        getCurrentLocation()
+    }
 
 }
