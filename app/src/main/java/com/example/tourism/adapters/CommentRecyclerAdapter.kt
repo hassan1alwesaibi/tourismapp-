@@ -45,17 +45,21 @@ class CommentRecyclerAdapter(val list: List<CommentsModel>,val picContext: Conte
                         .centerCrop()
                         .skipMemoryCache(false)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .placeholder(R.drawable.userprofile)
                         .into(holder.userpicture)
                         Log.d(TAG, user.toString())
                         Log.d(TAG, ".............")
                 }.addOnFailureListener(){
                     Log.d(TAG, it.message.toString())
                 }
-
     }
+
+
     override fun getItemCount(): Int {
         return list.size
     }
+
+
     class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
          val fullname : TextView =  itemView.findViewById(R.id.fullnameOfUser)
          val userpicture: ImageView = itemView.findViewById(R.id.picOfUser)

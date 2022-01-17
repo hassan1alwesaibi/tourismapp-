@@ -11,12 +11,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bar"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <ImageView
@@ -28,7 +29,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
@@ -36,7 +37,7 @@
                 <TextView
                     android:id="@+id/NameOfPlace"
                     android:layout_width="352dp"
-                    android:layout_height="43dp"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingLeft="5dp"
                     android:paddingEnd="5dp"
@@ -55,7 +56,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
@@ -74,7 +75,7 @@
                 <TextView
                     android:id="@+id/Business_status"
                     android:layout_width="352dp"
-                    android:layout_height="43dp"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingLeft="5dp"
                     android:paddingEnd="5dp"
@@ -87,7 +88,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
@@ -106,7 +107,7 @@
                 <TextView
                     android:id="@+id/Address"
                     android:layout_width="352dp"
-                    android:layout_height="43dp"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingLeft="5dp"
                     android:paddingEnd="5dp"
@@ -162,13 +163,14 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperefreshlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/detailsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bar"
+            android:background="@color/white"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

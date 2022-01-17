@@ -123,6 +123,8 @@ class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
         view.draw(canvas)
         return bitmap
     }
+
+
     fun coverBitmaptouri(context: Context, bitmap: Bitmap?): Uri {
         val bytes = ByteArrayOutputStream()
         bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, bytes)

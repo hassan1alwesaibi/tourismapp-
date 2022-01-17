@@ -31,7 +31,7 @@ class CommentsViewModel: ViewModel() {
 
     }
     fun getlistComment(placeId:String){
-        var listcomment = mutableListOf<CommentsModel>()
+        val listcomment = mutableListOf<CommentsModel>()
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 apiRepo.getcomments(placeId)

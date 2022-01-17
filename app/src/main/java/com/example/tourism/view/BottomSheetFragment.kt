@@ -42,30 +42,17 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
        val detail: DetailsModel? = requireArguments().getParcelable("details")
 //---------------------------------------------------------------------to share photo of places to anthor app
         binding.shared.setOnClickListener() {
-
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.type = "image/*"
-            intent.putExtra(Intent.EXTRA_STREAM, detail!!.bitmap)
-            context?.startActivity(Intent.createChooser(intent, "Share"))
-            dismiss()
+            shared(detail!!.bitmap)
         }
  //----------------------------------------------------------------------------to open goole map
         binding.getAddress.setOnClickListener() {
-            val location: Location = detail!!.location
-            requireArguments().clear()
-            val Uri = Uri.parse("google.navigation:q=${location.lat},${location.lng}")
-            val mapIntent = Intent(Intent.ACTION_VIEW, Uri)
-            mapIntent.setPackage("com.google.android.apps.maps")
-            startActivity(mapIntent)
-            dismiss()
+            location(detail!!.location)
         }
  //----------------------------------------------------------------- // to see list of users
         binding.users.setOnClickListener() {
@@ -76,33 +63,50 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
  //--------------------------------------------------------------------for add cooment
         // open custom dialog to writes comment
         binding.comments.setOnClickListener() {
-            val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-            builder.setTitle("Add Comments")
-            builder.setCancelable(false)
-           // receive
-            val view: View = layoutInflater.inflate(R.layout.dialog_comments, null)
-            val comments: EditText = view.findViewById(R.id.dialog_comment)
-
-            builder.setView(view)
-
-            builder.setPositiveButton("Add", { _, _ ->
-              //save comment to commentsModel
-                bottonsheetViewModel.save(detail!!.placeId, comments.text.toString())
-                this@BottomSheetFragment.dismiss()
-            })
-            builder.setNegativeButton("Cancel", { _, _ ->
-                this@BottomSheetFragment.dismiss()
-            })
-
-           builder.show()
-
-
-
+             commentdialog(detail!!.placeId)
         }
-//----------------------------------------------------------------------------
+
     }
+//------------------------------------------------------------------------------------
+  fun shared(uri: Uri){
+      val intent = Intent(Intent.ACTION_SEND)
+      intent.type = "image/*"
+      intent.putExtra(Intent.EXTRA_STREAM, uri)
+      context?.startActivity(Intent.createChooser(intent, "Share"))
+      dismiss()
 
+  }
+    //------------------------------------------------------------------------
+    fun location(location: Location){
+        requireArguments().clear()
+        val Uri = Uri.parse("google.navigation:q=${location.lat},${location.lng}")
+        val mapIntent = Intent(Intent.ACTION_VIEW, Uri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        startActivity(mapIntent)
+        dismiss()
+    }
+ //-------------------------------------------------------------------------------
+    fun commentdialog(placeId:String){
+      val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+      builder.setTitle("Add Comments")
+      builder.setCancelable(false)
+      // receive
+      val view: View = layoutInflater.inflate(R.layout.dialog_comments, null)
+      val comments: EditText = view.findViewById(R.id.dialog_comment)
 
+      builder.setView(view)
+
+      builder.setPositiveButton("Add", { _, _ ->
+          //save comment to commentsModel
+          bottonsheetViewModel.save(placeId, comments.text.toString())
+          this@BottomSheetFragment.dismiss()
+      })
+      builder.setNegativeButton("Cancel", { _, _ ->
+          this@BottomSheetFragment.dismiss()
+      })
+      builder.show()
+  }
+//-----------------------------------------------------------------------
 }
 
 

@@ -8,7 +8,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.view.inputmethod.InputMethodManager
+
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -23,7 +23,7 @@ import com.example.tourism.view.Activity.LOCATION_PERMISSION_REQ_CODE
 import com.example.tourism.view.Activity.LoginActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
+
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.tourism.R
 import com.example.tourism.ViewModel.PlaceViewModel
@@ -35,7 +35,6 @@ import com.google.android.gms.location.LocationServices
 const val TAG = "MainFragment"
 private var latitude: Double = 0.0
 private var longitude: Double = 0.0
-
 
 class MainFragment : Fragment() {
     private val placeViewModel: PlaceViewModel by activityViewModels()
@@ -51,7 +50,6 @@ class MainFragment : Fragment() {
         super.onCreate(savedInstanceState)
       fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
     getCurrentLocation()
-
       arguments?.let {
 
         }
@@ -74,12 +72,7 @@ class MainFragment : Fragment() {
     sharedPreferences = requireActivity().getSharedPreferences("Settings", AppCompatActivity.MODE_PRIVATE)
     PlaceAdapter = PlacesRecyclerAdapter(placeViewModel,requireContext(),requireFragmentManager(),requireView())
     binding.MainViewRecyclerView.adapter = PlaceAdapter
-   // fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-//    getCurrentLocation() // call
-//    PlaceAdapter.notifyDataSetChanged()
-//    val get = sharedPreferences.getInt("seek",1500)
-//    placeViewModel.callPlace(26.394579, 50.194706,get)
-   observers()// call
+    observers()// call
 //--------------------------------------------------------------------------------------
     // for refresh page
     binding.swiperefreshlayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener(){
@@ -91,62 +84,6 @@ class MainFragment : Fragment() {
         val toolbar: Toolbar = view.findViewById(R.id.toolbar)
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
         (activity as AppCompatActivity?)!!.supportActionBar!!.title = ""
-
-// for paging
-//    binding.MainViewRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener()
-//    {
-//        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//            super.onScrollStateChanged(recyclerView, newState)
-//            if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE){
-//
-//
-//                getCurrentLocation()
-//                Log.d(TAG, "fuc")
-//            }
-//        }
-//
-//    })
-
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        Log.d(TAG,"onViewStateRestored")
-        super.onViewStateRestored(savedInstanceState)
-    }
-
-    override fun onStart() {
-        Log.d(TAG,"onStart")
-        super.onStart()
-    }
-
-    override fun onResume() {
-        Log.d(TAG,"onResume")
-        super.onResume()
-    }
-
-    override fun onPause() {
-        Log.d(TAG,"onPause")
-        super.onPause()
-    }
-
-    override fun onStop() {
-        Log.d(TAG,"onStop")
-        super.onStop()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        Log.d(TAG,"onSaveInstanceState")
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onDestroyView() {
-        Log.d(TAG,"onDestroyView")
-        super.onDestroyView()
-    }
-
-    override fun onDestroy() {
-        Log.d(TAG,"onDestroy")
-        super.onDestroy()
     }
     //-------------------------------------------------------------------------------
 
@@ -156,6 +93,9 @@ class MainFragment : Fragment() {
         requireActivity().menuInflater.inflate(R.menu.toolbar, menu)
         val searchItem = menu.findItem(R.id.app_bar_search)
         val searchView = searchItem.actionView as SearchView
+
+
+      //------------- for search
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 placeViewModel.searchPlace(query)
@@ -266,18 +206,19 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //------------------------------------------------------------------------------------------
     fun observers () {
         placeViewModel.placesLiveDate.observe(viewLifecycleOwner,{
-
+           binding.progressBar.animate().alpha(0f).setDuration(1000)
             PlaceAdapter.submitList(it)
-
-          //  Log.d(TAG, it.toString())
+            Log.d(TAG, it.toString())
         })
 
 
     }
 //----------------------------------------------------------------------------------------------------
+
+
      private fun getCurrentLocation() {
-     //   Log.d("value current lan", "${latitude}")
-        //Log.d("result current lon", "${longitude}")
+        Log.d("value current lan", "${latitude}")
+        Log.d("result current lon", "${longitude}")
         println(latitude)
         println(longitude)
         if (checkSelfPermission(
@@ -285,8 +226,6 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-         //   Log.d("MainActivityFragment", "sdfsdfsdfsdfsdfds")
-
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                 // getting the last known or current location
                 latitude = location.latitude
@@ -315,7 +254,7 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
         }
     }
 
-
+// for permission
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
