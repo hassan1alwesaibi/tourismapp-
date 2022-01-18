@@ -35,7 +35,9 @@ class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
                             val fileContext: Context,
                             val fragmentManager:FragmentManager,
                             val view:View) :
+
     RecyclerView.Adapter<PlacesRecyclerAdapter.PlacesViewHolder>() {
+
     var bottomsheetDialog = BottomSheetFragment()
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Result>() {
         override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
@@ -80,6 +82,7 @@ class PlacesRecyclerAdapter(val viewMode: PlaceViewModel,
             holder.nameOfPlace.text = item.name
 //-------------------------------------------------------------when press in pic show details and comment
             holder.pictureOfPlace.setOnClickListener {
+
 
                 bundle.putParcelable("details",details(item,imgLink,coverBitmaptouri(fileContext,getBitmapFromView(holder.pictureOfPlace))))
                 findNavController(view).navigate(R.id.action_mainFragment_to_detailsFragment,bundle)

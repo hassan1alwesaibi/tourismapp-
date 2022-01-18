@@ -71,7 +71,7 @@ class RegisterActivity : AppCompatActivity() {
                                         }
 
                                         notification()
-                                        sharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE)
+//                                        sharedPreferences = getSharedPreferences("Setting", MODE_PRIVATE)
                                         sharedPreferencesEditor = sharedPreferences.edit()
                                         sharedPreferencesEditor.putBoolean("isUserLogin", true)
                                         sharedPreferencesEditor.putString("UsserID", FirebaseAuth.getInstance().uid.toString())
@@ -130,15 +130,15 @@ class RegisterActivity : AppCompatActivity() {
 
             val pendingIntent = PendingIntent.getActivity(this, 444, intent, PendingIntent.FLAG_UPDATE_CURRENT)
             nbuilder = Notification.Builder(this, channelId)
-                .setSmallIcon(R.drawable.ic_place)
+                .setSmallIcon(R.drawable.place)
                 .setContentTitle("Update profile")
                 .setContentIntent(pendingIntent)
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_place))
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.place))
         } else {
 
             nbuilder = Notification.Builder(this)
-                .setSmallIcon(R.drawable.ic_place)
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_place))
+                .setSmallIcon(R.drawable.place)
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.place))
         }
         notificationManager.notify(1234, nbuilder.build())
 

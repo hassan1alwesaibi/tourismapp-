@@ -42,7 +42,7 @@ class profileFragment : Fragment() {
     private val usersViewModel: UsersViewModel by activityViewModels()
     private lateinit var binding: FragmentProfileBinding
     private lateinit var progressDialog: ProgressDialog
-    lateinit var imagePath:Uri
+    var imagePath:Uri = "".toUri()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

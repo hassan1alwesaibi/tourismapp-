@@ -58,25 +58,7 @@
                 android:textSize="17sp"
                 android:textColor="@color/olive" />
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/users"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_users" />
-            <TextView
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="Users"
-                android:textSize="17sp"
-                android:textColor="@color/olive" />
-        </LinearLayout>
         <LinearLayout
             android:id="@+id/comments"
             android:layout_width="match_parent"
@@ -94,6 +76,26 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="Add Comment"
+                android:textSize="17sp"
+                android:textColor="@color/olive" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/users"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_users" />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Users"
                 android:textSize="17sp"
                 android:textColor="@color/olive" />
         </LinearLayout>

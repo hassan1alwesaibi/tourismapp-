@@ -8,16 +8,36 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.tourism.Model.Dto.CommentsModel
 import com.example.tourism.Model.Dto.Users
+
 import com.example.tourism.R
 import com.example.tourism.Repostries.FireRepository
 
 private const val TAG = "CommentRecyclerAdapter"
-class CommentRecyclerAdapter(val list: List<CommentsModel>,val picContext: Context) :
+class CommentRecyclerAdapter(val list: List<CommentsModel>,
+                             val picContext: Context) :
+
     RecyclerView.Adapter<CommentRecyclerAdapter.CommentViewHolder>() {
+
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CommentsModel>() {
+        override fun areItemsTheSame(oldItem: CommentsModel, newItem: CommentsModel): Boolean {
+            return oldItem.UserId == newItem.UserId
+        }
+
+        override fun areContentsTheSame(oldItem: CommentsModel, newItem: CommentsModel): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
+    fun submitList(list: List<CommentsModel>) {
+        differ.submitList(list)
+    }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -31,7 +51,7 @@ class CommentRecyclerAdapter(val list: List<CommentsModel>,val picContext: Conte
         )
     }
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
-        val item = list[position]
+        val item = differ.currentList[position]
         holder.comment.text = item.comments
         val apiRepo = FireRepository.get()
         // Get user details by comments
@@ -56,7 +76,7 @@ class CommentRecyclerAdapter(val list: List<CommentsModel>,val picContext: Conte
 
 
     override fun getItemCount(): Int {
-        return list.size
+        return differ.currentList.size
     }
 
 

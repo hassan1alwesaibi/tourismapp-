@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/white"
+    tools:context=".view.MainFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/naerby"
+                android:layout_width="75dp"
+                android:layout_height="85dp"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:background="@drawable/rectangle"
+                android:src="@drawable/ic_near" />
+
+            <ImageView
+                android:id="@+id/hotel"
+                android:layout_width="75dp"
+                android:layout_height="85dp"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:background="@drawable/rectangle"
+                android:src="@drawable/ic_hotel" />
+
+            <ImageView
+                android:id="@+id/airport"
+                android:layout_width="75dp"
+                android:layout_height="85dp"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:background="@drawable/rectangle"
+                android:src="@drawable/ic_airport" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/museum"
+                android:layout_width="75dp"
+                android:layout_height="85dp"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_margin="7dp"
+                android:background="@drawable/rectangle"
+                android:src="@drawable/ic_museum" />
+
+            <ImageView
+                android:id="@+id/coffee"
+                android:layout_width="75dp"
+                android:layout_height="85dp"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_margin="7dp"
+                android:background="@drawable/rectangle"
+                android:src="@drawable/ic_coffee" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="75dp"
+                android:layout_height="85dp"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_margin="7dp"
+                android:background="@drawable/rectangle"
+                android:src="@drawable/ic_restaurants" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -92,6 +92,7 @@ class detailsFragment : Fragment() {
                 commentList.clear()
                 commentList.addAll(it)
                 commentAdapter.notifyDataSetChanged()
+                commentAdapter.submitList(it)
                 commentsViewModel.getLiveData.postValue(null)
             }
         })
