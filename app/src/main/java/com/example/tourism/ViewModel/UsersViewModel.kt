@@ -100,7 +100,7 @@ class UsersViewModel : ViewModel() {
             try {
                 apiRepo.getUser().addOnSuccessListener { documentSnapshot ->
                     val user = documentSnapshot.toObject<Users>(Users::class.java)
-                    getUserLiveDate.postValue(user)
+                    getUserLiveDate.postValue(user!!)
                     Log.d("Firebase", "document saved")
                 }.addOnFailureListener {
                     usersErrorLiveData.postValue(it.message.toString())
