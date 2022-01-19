@@ -27,6 +27,7 @@ class BottonSheetViewModel: ViewModel() {
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
 
     }
+
     fun save(placeId:String, comment: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {

@@ -33,9 +33,7 @@ import com.example.tourism.adapters.PlacesRecyclerAdapter
 import com.example.tourism.databinding.ResultFragmentBinding
 import com.google.android.gms.location.LocationServices
 import android.widget.TextView
-
-
-
+import androidx.recyclerview.widget.RecyclerView
 
 
 const val TAG = "query"
@@ -81,10 +79,16 @@ class ResultFragment : Fragment() {
 
 //--------------------------------------------------------------------------------------
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    Log.d(TAG,"onViewCreated")
-    sharedPreferences = requireActivity().getSharedPreferences("Settings", AppCompatActivity.MODE_PRIVATE)
-    PlaceAdapter = PlacesRecyclerAdapter(placeViewModel,requireContext(),requireFragmentManager(),requireView())
+    super.onViewCreated(view, savedInstanceState)
+    Log.d(TAG, "onViewCreated")
+    sharedPreferences =
+        requireActivity().getSharedPreferences("Settings", AppCompatActivity.MODE_PRIVATE)
+    PlaceAdapter = PlacesRecyclerAdapter(
+        placeViewModel,
+        requireContext(),
+        requireFragmentManager(),
+        requireView()
+    )
     binding.MainViewRecyclerView.adapter = PlaceAdapter
     observers()// call
 //--------------------------------------------------------------------------------------
@@ -95,12 +99,25 @@ class ResultFragment : Fragment() {
 //        binding.swiperefreshlayout.setRefreshing(false)
 //})
 //-------------------------------------------------------------set up toolbar like actionbar
-        val toolbar: Toolbar = view.findViewById(R.id.toolbar)
-        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = ""
-    }
-    //-------------------------------------------------------------------------------
+    val toolbar: Toolbar = view.findViewById(R.id.toolbar)
+    (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+    (activity as AppCompatActivity?)!!.supportActionBar!!.title = ""
 
+    //----------for paging i comment it bc next token give me same first token
+
+//    binding.MainViewRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//            super.onScrollStateChanged(recyclerView, newState)
+//            if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+//
+//
+//                getCurrentLocation()
+//                Log.d(TAG, "fuc")
+//            }
+//        }
+//
+//    })
+}
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 

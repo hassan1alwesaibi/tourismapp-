@@ -33,12 +33,11 @@ class userlistFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observe()
+        observe()// call
         userAdapter =  UsersRecyclerAdapter(usersList,usersViewModel,requireContext())
         binding.UsersViewRecyclerView.adapter = userAdapter
         usersViewModel.getlistUsers()
-
- //---------------------------------------------------when press in it will open mainFragment
+  //---------------------------------------------------when press in it will open mainFragment
         binding.close.setOnClickListener {
             findNavController().navigate(R.id.action_userlistFragment_to_mainFragment)
         }

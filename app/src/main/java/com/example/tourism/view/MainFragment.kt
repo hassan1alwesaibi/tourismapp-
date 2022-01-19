@@ -53,8 +53,8 @@ class MainFragment : Fragment() {
         binding.banks.setOnClickListener{
             callresult("banks")
         }
-        binding.entertainments.setOnClickListener{
-            callresult("entertainments")
+        binding.picnic.setOnClickListener{
+            callresult("picnic")
         }
         super.onViewCreated(view, savedInstanceState)
     }
