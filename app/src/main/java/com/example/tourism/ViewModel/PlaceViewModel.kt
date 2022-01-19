@@ -1,13 +1,12 @@
 package com.example.tourism.ViewModel
 
-import android.content.ContentValues
+
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.tourism.Repostries.PlaceRepository
 import androidx.lifecycle.viewModelScope
-import com.example.tourism.Model.Dto.DetailsModel
-import com.example.tourism.Model.Dto.Users
+
 import com.example.tourism.Model.PlaceModel.Result
 
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +18,7 @@ class PlaceViewModel:ViewModel() {
 
     private  val TAG = "PlaceViewModel"
     val placesLiveDate = MutableLiveData<List<Result>>()
-     val savedetalsLiveDate = MutableLiveData<DetailsModel>()
+
     val placesErrorLiveData = MutableLiveData<String>()
 
     // Getting  from Api  Repository with companion object function
@@ -27,6 +26,7 @@ class PlaceViewModel:ViewModel() {
     // Getting from Room Service Repository with companion object function
    // private val databaseRepo = RoomServiceRepository.get()
     var pageToken:String = ""
+
     fun callPlace(lat:Double,lng:Double,radius:Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -52,10 +52,10 @@ class PlaceViewModel:ViewModel() {
         }
     }
     //----------------------------------------------------------------
-    fun searchPlace(query: String?) {
+    fun searchPlace(query: String?,radius: Any) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = apiRepo.searchPlaces(query!!)
+                val response = apiRepo.searchPlaces(query!!,radius)
                 if(response.isSuccessful){
                     response.body()?.run {
                         // Send Response to view

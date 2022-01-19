@@ -72,8 +72,11 @@ class detailsFragment : Fragment() {
 
         commentRecyclerView.adapter = commentAdapter
         commentsViewModel.getlistComment(details!!.placeId)
+
         observe()
-       // for refresh page
+
+
+        //------------------------ for refresh page
         binding.swiperefreshlayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener(){
             commentsViewModel.getlistComment(details!!.placeId)
             commentAdapter.notifyDataSetChanged()
@@ -82,10 +85,13 @@ class detailsFragment : Fragment() {
 
     }
 
+
     override fun onSaveInstanceState(oldInstanceState: Bundle) {
         super.onSaveInstanceState(oldInstanceState)
         oldInstanceState.clear()
     }
+
+
     fun observe() {
         commentsViewModel.getLiveData.observe(viewLifecycleOwner, {
             it?.let {

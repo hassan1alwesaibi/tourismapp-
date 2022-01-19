@@ -1,90 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
 
-    android:background="@color/white"
-    tools:context=".view.MainFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
-        android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/hotel"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="40dp"
+        app:cardCornerRadius="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_margin="10dp"
+            android:src="@drawable/hotel" />
+    </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/naerby"
-                android:layout_width="75dp"
-                android:layout_height="85dp"
-                android:layout_gravity="center"
-                android:layout_margin="7dp"
-                android:background="@drawable/rectangle"
-                android:src="@drawable/ic_near" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/naerby"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        app:cardCornerRadius="7dp"
+        app:layout_constraintEnd_toStartOf="@+id/hotel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/hotel"
-                android:layout_width="75dp"
-                android:layout_height="85dp"
-                android:layout_gravity="center"
-                android:layout_margin="7dp"
-                android:background="@drawable/rectangle"
-                android:src="@drawable/ic_hotel" />
-
-            <ImageView
-                android:id="@+id/airport"
-                android:layout_width="75dp"
-                android:layout_height="85dp"
-                android:layout_gravity="center"
-                android:layout_margin="7dp"
-                android:background="@drawable/rectangle"
-                android:src="@drawable/ic_airport" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_margin="10dp"
+            android:src="@drawable/nearby" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/hospitals"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        app:cardCornerRadius="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coffee">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/hospital" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/museum"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="7dp"
+        app:layout_constraintEnd_toStartOf="@+id/coffee"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/naerby">
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/museum" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/coffee"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        app:cardCornerRadius="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hotel">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/coffee" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/banks"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="7dp"
+        app:layout_constraintEnd_toStartOf="@+id/airport"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entertainments"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/ban" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/car"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/museum">
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/car" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/entertainments"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="7dp"
+        app:layout_constraintEnd_toStartOf="@+id/restaurants"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/car"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/picnic" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/restaurants"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        app:cardCornerRadius="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hospitals"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/restaurant" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/airport"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        app:cardCornerRadius="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurants">
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/airport" />
+    </androidx.cardview.widget.CardView>
 
 
-            <ImageView
-                android:id="@+id/museum"
-                android:layout_width="75dp"
-                android:layout_height="85dp"
-                android:layout_gravity="center|center_horizontal"
-                android:layout_margin="7dp"
-                android:background="@drawable/rectangle"
-                android:src="@drawable/ic_museum" />
-
-            <ImageView
-                android:id="@+id/coffee"
-                android:layout_width="75dp"
-                android:layout_height="85dp"
-                android:layout_gravity="center|center_horizontal"
-                android:layout_margin="7dp"
-                android:background="@drawable/rectangle"
-                android:src="@drawable/ic_coffee" />
-
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="75dp"
-                android:layout_height="85dp"
-                android:layout_gravity="center|center_horizontal"
-                android:layout_margin="7dp"
-                android:background="@drawable/rectangle"
-                android:src="@drawable/ic_restaurants" />
-        </LinearLayout>
-
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

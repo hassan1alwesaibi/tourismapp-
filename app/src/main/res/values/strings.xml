@@ -22,6 +22,7 @@
     <string name="first_name">First Name :</string>
     <string name="last_name">Last Name :</string>
     <string name="filter">Filter</string>
+    <string name="search_with_radius_filter">Search With Radius Filter</string>
 
 
     <string-array name="gender">

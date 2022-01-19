@@ -1,11 +1,9 @@
 package com.example.tourism.view
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.example.tourism.R
@@ -27,42 +25,49 @@ class MainFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-       // var resultFragment = ResultFragment()
-        val bundle = Bundle()
-
         binding.naerby.setOnClickListener{
-            bundle.putString("query","nearby")
-            setFragmentResult("CODE", bundle)
-            //resultFragment.arguments = bundle
-            findNavController().navigate(R.id.action_blankFragment_to_mainFragment)
-
+            callresult("nearby")
         }
         binding.hotel.setOnClickListener{
-            bundle.putString("query","hotel")
-            setFragmentResult("CODE", bundle)
-
-            findNavController().navigate(R.id.action_blankFragment_to_mainFragment)
-
+            callresult("hotel")
         }
         binding.airport.setOnClickListener{
-            bundle.putString("query","airport")
-            setFragmentResult("CODE", bundle)
+            callresult("airport")
 
-            findNavController().navigate(R.id.action_blankFragment_to_mainFragment)
         }
         binding.museum.setOnClickListener{
-            bundle.putString("query","museum")
-            setFragmentResult("CODE", bundle)
-
-            findNavController().navigate(R.id.action_blankFragment_to_mainFragment)
+            callresult("museum")
         }
          binding.coffee.setOnClickListener{
-             bundle.putString("query","coffee")
-             setFragmentResult("CODE", bundle)
-
-             findNavController().navigate(R.id.action_blankFragment_to_mainFragment)
+             callresult("coffee")
          }
+        binding.restaurants.setOnClickListener{
+            callresult("restaurants")
+        }
+        binding.car.setOnClickListener{
+            callresult("car rental")
+        }
+        binding.hospitals.setOnClickListener{
+            callresult("hospitals")
+        }
+        binding.banks.setOnClickListener{
+            callresult("banks")
+        }
+        binding.entertainments.setOnClickListener{
+            callresult("entertainments")
+        }
         super.onViewCreated(view, savedInstanceState)
+    }
+
+// this function open result fragment
+    fun callresult(places:String){
+        val bundle = Bundle()
+        // pass query to athor fragment
+        bundle.putString("query",places)
+        setFragmentResult("CODE", bundle)
+
+        findNavController().navigate(R.id.action_blankFragment_to_mainFragment)
+
     }
 
 }

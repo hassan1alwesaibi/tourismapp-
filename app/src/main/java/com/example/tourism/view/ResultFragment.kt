@@ -32,6 +32,10 @@ import com.example.tourism.ViewModel.PlaceViewModel
 import com.example.tourism.adapters.PlacesRecyclerAdapter
 import com.example.tourism.databinding.ResultFragmentBinding
 import com.google.android.gms.location.LocationServices
+import android.widget.TextView
+
+
+
 
 
 const val TAG = "query"
@@ -45,7 +49,7 @@ class ResultFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var sharedPreferences: SharedPreferences
     lateinit var sharedPreferencesEditor: SharedPreferences.Editor
-
+     var query:String? = null
 
     //-------------------------------------------------------------------------------------
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,13 +61,9 @@ class ResultFragment : Fragment() {
 
         setFragmentResultListener("CODE") { requestKey, bundle ->
             // We use a String here, but any type that can be put in a Bundle is supported
-            val query = bundle.getString("query")
+            query = bundle.getString("query")
             Log.d(TAG,query.toString())
-            if (query =="nearby"){
-            getCurrentLocation()
-        }else{
-            placeViewModel.searchPlace(query)
-        }
+            fetchplaces()
 
         }
 
@@ -89,11 +89,11 @@ class ResultFragment : Fragment() {
     observers()// call
 //--------------------------------------------------------------------------------------
     // for refresh page
-    binding.swiperefreshlayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener(){
-        getCurrentLocation()
-        PlaceAdapter.notifyDataSetChanged()
-        binding.swiperefreshlayout.setRefreshing(false)
-})
+//    binding.swiperefreshlayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener(){
+//        getCurrentLocation()
+//        PlaceAdapter.notifyDataSetChanged()
+//        binding.swiperefreshlayout.setRefreshing(false)
+//})
 //-------------------------------------------------------------set up toolbar like actionbar
         val toolbar: Toolbar = view.findViewById(R.id.toolbar)
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
@@ -113,7 +113,7 @@ class ResultFragment : Fragment() {
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
 
-                placeViewModel.searchPlace(query)
+                placeViewModel.searchPlace(query,"")
                 searchView.clearFocus()
 //
 
@@ -185,8 +185,9 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
             valueradius.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-
-
+                    // to show value for radius a
+                    val t:TextView = view.findViewById(R.id.value)
+                    t.setText(progress.toString())
                     Log.d("SeekBarValue", seekBar?.progress.toString())
                     if(seekBar != null){
                         startpoint = seekBar.progress
@@ -207,7 +208,7 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
             builder.setPositiveButton("Submit", { _, _ ->
                valueradius.progress
               // when select value will refresh page
-                getCurrentLocation()
+                fetchplaces()
             })
             builder.setNegativeButton("Close", { _, _ -> })
             builder.show()
@@ -228,10 +229,16 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
 
     }
+    fun fetchplaces(){
+        val get = sharedPreferences.getInt("seek",1500)
+        if (query =="nearby"){
+            getCurrentLocation()
+        }else{
+            placeViewModel.searchPlace(query,get)
+        }
+    }
 //----------------------------------------------------------------------------------------------------
-
-
-     private fun getCurrentLocation() {
+    private fun getCurrentLocation() {
         Log.d("value current lan", "${latitude}")
         Log.d("result current lon", "${longitude}")
         println(latitude)

@@ -130,15 +130,15 @@ class RegisterActivity : AppCompatActivity() {
 
             val pendingIntent = PendingIntent.getActivity(this, 444, intent, PendingIntent.FLAG_UPDATE_CURRENT)
             nbuilder = Notification.Builder(this, channelId)
-                .setSmallIcon(R.drawable.place)
+                .setSmallIcon(R.drawable.icon)
                 .setContentTitle("Update profile")
                 .setContentIntent(pendingIntent)
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.place))
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.icon))
         } else {
 
             nbuilder = Notification.Builder(this)
-                .setSmallIcon(R.drawable.place)
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.place))
+                .setSmallIcon(R.drawable.icon)
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.icon))
         }
         notificationManager.notify(1234, nbuilder.build())
 

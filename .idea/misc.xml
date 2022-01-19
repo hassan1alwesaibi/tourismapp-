@@ -7,6 +7,7 @@
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/addition.xml" value="0.11296296296296296" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic__dots.xml" value="0.1" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_airport.xml" value="0.13240740740740742" />
+        <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_banks.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_baseline_create_24.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.14907407407407408" />
@@ -18,7 +19,9 @@
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_done.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_dots.xml" value="0.1" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_edit.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_entertainments.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_filtter.xml" value="0.1" />
+        <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_hospitals.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_hotel.xml" value="0.12685185185185185" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_hotels.xml" value="0.13240740740740742" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/drawable/ic_icon1.xml" value="0.1" />
@@ -58,7 +61,7 @@
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.22" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/fragment_details.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/fragment_fragment.xml" value="0.22" />
-        <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/fragment_main.xml" value="0.4094775212636695" />
+        <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/fragment_main.xml" value="0.3723756906077348" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/fragment_profile.xml" value="0.2988235294117647" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/fragment_test.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/fragment_userlist.xml" value="0.25" />
@@ -69,6 +72,8 @@
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/itemuser_layout.xml" value="0.2668067226890756" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/main_fragment.xml" value="0.18795180722891566" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/range_slider_layout.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/result_fragment.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/layout/test.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/menu/toolbar.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/Hassan/OneDrive/Desktop/tourism2/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
@@ -82,5 +87,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.3723756906077348" />
+      </ProjectState>
+    </option>
   </component>
 </project>

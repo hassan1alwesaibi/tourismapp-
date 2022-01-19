@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         navController = navHostFragment.navController
         if(intent.getBooleanExtra("Notification",false)) {
-            navController.navigate(R.id.action_mainFragment_to_profileFragment)
+            navController.navigate(R.id.action_blankFragment_to_profileFragment)
         }
     }
 

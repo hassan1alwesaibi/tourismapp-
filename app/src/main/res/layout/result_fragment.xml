@@ -25,10 +25,7 @@
 
 
     </com.google.android.material.appbar.AppBarLayout>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/swiperefreshlayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -38,7 +35,7 @@
         android:background="@color/bar"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <ProgressBar
         android:id="@+id/progress_bar"

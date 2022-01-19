@@ -60,7 +60,7 @@ class profileFragment : Fragment() {
 
   //--------------------------------------- // to close profile and go to main fragment
         binding.close.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_mainFragment)
+            findNavController().popBackStack()
         }
    //-----------------------------------------// when press to edit let you allow to change information
         binding.edittoggleButton.setOnClickListener {

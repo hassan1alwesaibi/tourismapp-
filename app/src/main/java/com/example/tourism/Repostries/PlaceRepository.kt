@@ -27,8 +27,9 @@ class PlaceRepository(val context: Context) {
                           pageToken:String) =
         placeApi.getPlaces("$lat,$lng",radius,pageToken)
    // text search for places
-    suspend fun searchPlaces(query: String) =
-        placeApi.searchPlaces(query)
+    suspend fun searchPlaces(query: String,
+                             radius: Any) =
+        placeApi.searchPlaces(query,radius)
 
 
 

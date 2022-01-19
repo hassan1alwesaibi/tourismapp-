@@ -4,6 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:shadowColor="@color/olive"
+        android:text="@string/search_with_radius_filter" />
 
     <TextView
         android:id="@+id/value"
@@ -22,7 +31,8 @@
         android:max="15000"
         android:stepSize="100"
         android:valueFrom="1500"
-        android:valueTo="150000" />
+        android:valueTo="150000"
+        />
 
 
 

@@ -19,6 +19,7 @@ interface IPlacesApi {
 
     suspend fun searchPlaces(
         @Query("query") query: String,
+        @Query("radius") radius: Any
     ):Response<SearchModel>
 
 
